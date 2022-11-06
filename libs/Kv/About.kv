@@ -1,0 +1,94 @@
+#:import ScrollEffect  kivy.effects.scroll.ScrollEffect
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+<About_School>:
+	id:about_school
+	name:"About_school"
+	MDFloatLayout:
+		size_hint:1,1
+		md_bg_color:get_color_from_hex("ABE1FB")
+		MDIconButton:
+			icon:"arrow-right"
+			theme_text_color: 'Custom'
+			ripple_scale:0
+			text_color: get_color_from_hex('#000000')
+			pos_hint:{"center_x":.08,"center_y":.95}
+			on_release:
+				root.manager.current = "Settings"
+				root.manager.transition.direction = "left"
+		MDLabel:
+			text:"About"
+			theme_text_color:"Custom"
+			text_color:get_color_from_hex("#f81113")
+			font_name:"Ubuntu/Ubuntu-Bold"
+			font_size:"24dp"
+			pos_hint:{"center_x":.63,"center_y":.95}	
+		ScrollView:
+			effect_cls:"ScrollEffect"
+			do_scroll_y:True
+			do_scroll_x:False
+			pos_hint:{"top":.9}
+			MDRelativeLayout:
+				size_hint:1,None
+				height:"1580dp" if Window.size[0] < 2000 else "1200dp"
+				MDGridLayout:
+					cols:1
+					padding:"10dp"
+					MDBoxLayout:
+						id:img_box
+						orientation:"vertical"
+						id:head_image_box
+						size_hint:1,None
+						height:"330dp"  if Window.size[0] > 2000 else "200dp"
+						text:"assests/Aboutschool.jpg"
+						canvas.before:
+							Color:
+								rgba:1,1,1,1
+							RoundedRectangle:
+								pos:self.pos
+								size:self.size
+								source:"assets/Aboutschool.jpg"
+				MDBoxLayout:
+					orientation:"vertical"
+					size_hint:[1,.7] if Window.size[0] > 2000 else [1,.85]
+					spacing:"20dp"
+					padding:"15dp","5dp"
+					md_bg_color:1,1,1,1
+					MDLabel:
+						md_bg_color:1,0,0,1
+						size_hint_y: None
+						height: self.texture_size[1]
+						text:"[color=#ffffff]OUR INTRODUCTION [/color]"
+						halign:"center"
+						valign:"top"
+						markup:True
+						md_bg_color:get_color_from_hex("#f81113")
+						font_size:"35dp"
+						font_name:"Ubuntu/Ubuntu-Bold"
+					MDLabel:
+						text:"VISION"
+						size_hint_y: None
+						font_size:"25dp"
+						color:1,0,0,1
+			            height: self.texture_size[1]
+			            font_name:"Ubuntu/Ubuntu-Medium"
+			                    
+					MDLabel:
+			        	text:"""[b][color=#ff0000]T[/color][/b]o educate all students to the highest level of academic achievement, To enable them to reach and expand their potential and to prepare them to become productive, responsible, ethical, creative and compassionate members of society. We foster an enthusiastic ,creative community of learners prepared to continue their intellectual, emotional and physical development."""
+			            size_hint_y: None
+			            height: self.texture_size[1]
+			            markup:True
+			            font_name:"Ubuntu/Ubuntu-Regular"
+			        MDLabel:
+						text:"GOAL"
+						color:1,0,0,1
+						size_hint_y: None
+						font_size:"25dp"
+			            height: self.texture_size[1]
+			            font_name:"Ubuntu/Ubuntu-Medium"
+			        MDLabel:
+			            text:"""[b][color=#ff0000]T[/color][/b]o develop a national system of educalion which would help to build a generation of young men and women who are committed to enhance indian culture and infused with patriotic fervor,fully developed physically, vitally, mentally and spiritually capable of successfully facing challenges of day-to day life situations dedicated to the service of our those bothers and sisters who live in villages, forests, caves and slums and are deprived and destitute,so that they are liberated from the shackless of social evils and injustice and thus devoted may contribute to build up a harmonious, prosperous and culturally rich nation.\n\nOur motto is to provide students  a strong sense of character and strength through effective communication skill and interactive perspectives of mordern education. The school has airy rooms, filtered cool water, spacious lawns and a vast playground, it is fully  equipped with laboratorias, a rich library and reading rooms. In recent years, there has been significant progress in imparting latest education in all subjects. We are eagerly looking forward to apply new Education Policy initiated by central govt.\n\nBal Kalyan Samit is our mother institution which governs all the Saraswati Shishu Mandirs and  Saraswati Vidya Mardirs. It pays attention on their administrative and academic activities. It has been famous all over the district for educational, ethical and disciplinary values.The school is situated at Allahabad road in Sultanpur(UP).It was founded in 1978 by BalKalyan Samiti,Sultanpur. It was an English and Hindi Medium School from 6th to 8th only  but on the demand of the society, the school was started upto 10th in 1989 and thereafter upto 12th in 1993."""
+						size_hint_y: None
+			            height: self.texture_size[1]
+			            markup:True
+			            font_name:"Ubuntu/Ubuntu-Regular"
+			        Widget:						

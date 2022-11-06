@@ -1,0 +1,231 @@
+#:import ScrollEffect  kivy.effects.scroll.ScrollEffect
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import Window kivy.core.window.Window
+#:set main_color get_color_from_hex("#D63D6C")
+<MyBadgeLayout@AKBadgeLayout>:
+	pos_hint:{"center_x":.5,"center_y":.5}
+	badgeitem_padding:"5dp"
+<RecordArea>:
+	name:"RecordArea"
+	on_enter:
+		progress_relative.current_percent = root.stud_attend
+	MDFloatLayout:
+		size_hint:1,1
+		minimum_height:1
+		md_bg_color:main_color
+		MDIconButton:
+			icon:"arrow-left"
+			theme_text_color: 'Custom'
+			text_color: 3,3,3,1
+			pos_hint:{"center_x":.08,"center_y":.95}
+			ripple_scale:0
+			on_release:
+				root.manager.current = "Home"
+		MDLabel:
+			text:"My Records"
+			theme_text_color:"Custom"
+			text_color:3,3,3,1
+			font_name:"Ubuntu/Ubuntu-Bold"
+			font_size:"24dp"
+			pos_hint:{"center_x":.63,"center_y":.95}
+		ScrollView:
+			effect_cls:"ScrollEffect"
+			pos_hint:{"top":.9}
+			do_scroll_y:True
+			MDFloatLayout:
+				size_hint_y:None
+				height:"820dp"
+				size_hint_x:1
+				md_bg_color:main_color	          
+				MDBoxLayout:
+					size_hint:.9,.25
+					pos_hint:{"center_x":.5,"center_y":.85}
+					radius:[30,30,30,30]
+					padding:20
+					md_bg_color:get_color_from_hex("ffffff")
+					MDRelativeLayout:
+						padding:"12dp"
+						AKCircularProgress:
+			                id: progress_relative
+			                pos_hint: {"center_x": .6, "center_y": .45} if Window.size[0] < 2000 else {"center_x": .8, "center_y": .45}
+			                size_hint: None, None
+			                size: dp(200), dp(200)
+			                md_bg_color:1,0,0,1
+			                percent_type: "relative"
+			                start_deg: 240
+			                end_deg: 480
+			                max_percent: root.total_school_working_dy			
+						MDLabel:
+							id:atten_label
+							text:"Attendence : {0}%".format(int((progress_relative.current_percent/progress_relative.max_percent)*100))
+							font_name:"Ubuntu/Ubuntu-Medium"
+							theme_text_color:"Custom"
+							text_color:get_color_from_hex("#333333")
+							font_size:"20dp" if Window.size[0] < 2000 else "20sp"
+							pos_hint:{"center_y":.50,"center_x":.71} if Window.size[0] < 2000 else {"center_y":.6,"center_x":.85}
+						MDLabel:
+							text:f"Result Analysis : {root.user_Result_analysis}"
+							font_name:"Ubuntu/Ubuntu-Medium"
+							theme_text_color:"Custom"
+							text_color:get_color_from_hex("#333333")
+							font_size:"19sp" if Window.size[0] < 2000 else "20sp"
+							pos_hint:{"center_y":.35,"center_x":.7}if Window.size[0] < 2000 else {"center_y":.4,"center_x":.84}
+						MDLabel:
+							text:"*****" if int(root.user_attendence_percentage) > 75 else "***" 
+							font_name:"Ubuntu/Ubuntu-Medium"
+							theme_text_color:"Custom"
+							halign:"center"
+							text_color:get_color_from_hex("#ffffff")
+							font_size:"17sp"
+							pos_hint:{"center_y":.2,"center_x":.8}			
+				MDGridLayout:
+					size_hint:1,None
+					height:"160dp"
+					rows:1
+					pos_hint:{"center_x":.5,"center_y":.6}
+					md_bg_color:get_color_from_hex("#ffffff")
+					MDRelativeLayout:
+						padding:"20"
+						spacing:"30dp"
+						MDBoxLayout:
+							orientation:"vertical"
+							size_hint:.25,.8
+							pos_hint:{"center_x":.2,"center_y":.5}
+							radius:[30,30,5,5]
+							md_bg_color:main_color
+							padding:10
+							AnchorLayout:
+								anchor_x:"center"
+								anchor_y:"center"
+								MyBadgeLayout:
+									text:"0"
+									badgeitem_color:(1,0,0,1)
+									MDIconButton:
+										icon:"clipboard-list-outline"
+										theme_text_color:"Custom"
+										text_color:(1,1,1,1)
+										text_color:get_color_from_hex("ffffff")
+										user_font_size:"30dp" if Window.size[0] < 2000 else "50dp"
+										on_release:
+											root.manager.set_current("Assignment_Screen")
+											root.manager.transition.direction = "left"
+							MDTextButton:
+								text:"[b]Assignments[b]"
+								markup:True
+								font_name:"Ubuntu/Ubuntu-Light"
+								font_size:"10dp"
+								color:1,1,1,1
+								font_style:"Caption"
+								pos_hint:{"center_x":.5}
+								on_release:
+									root.manager.set_current("Assignment_Screen")
+									root.manager.transition.direction = "left"
+						MDBoxLayout:
+							orientation:"vertical"
+							size_hint:.25,.8
+							width:"110dp"
+							pos_hint:{"center_x":.5,"center_y":.5}
+							radius:[30,30,5,5]
+							padding:10
+							md_bg_color:main_color
+							AnchorLayout:
+								anchor_x:"center"
+								anchor_y:"center"
+								MDIconButton:
+									id:record_btn
+									icon:"account"
+									theme_text_color:"Custom"
+									text_color:get_color_from_hex("ffffff")
+									user_font_size:"30dp" if Window.size[0] < 2000 else "50dp"
+									on_release:
+										root.manager.transition.direction = "left"
+										app.show_user_profile(record_btn.icon)			
+							MDTextButton:
+								text:"[b]Profile[b]"
+								markup:True
+								font_name:"Ubuntu/Ubuntu-Light"
+								font_size:"10dp"
+								font_style:"Caption"
+								pos_hint:{"center_x":.5}
+								color:1,1,1,1
+								on_release:
+									root.manager.transition.direction = "left"
+									app.show_user_profile(record_btn.icon)
+						MDBoxLayout:
+							orientation:"vertical"
+							size_hint:.25,.8
+							width:"110dp"
+							pos_hint:{"center_x":.8,"center_y":.5}
+							radius:[30,30,5,5]
+							padding:12
+							md_bg_color:main_color
+							AnchorLayout:
+								anchor_x:"center"
+								anchor_y:"center"
+								MDIconButton:
+									icon:"account-details"
+									theme_text_color:"Custom"
+									text_color:get_color_from_hex("ffffff")
+									user_font_size:"30dp" if Window.size[0] < 2000 else "50dp"
+									on_release:
+										root.manager.set_current("Progress_Screen")
+										root.manager.transition.direction = "left"
+							MDTextButton:
+								text:"[b]Progress Report[/b]"
+								markup:True
+								font_name:"Ubuntu/Ubuntu-Light"
+								font_size:"10dp"
+								font_style:"Caption"
+								halign:"center"
+								color:1,1,1,1
+								pos_hint:{"center_x":.5}
+								on_release:
+									root.manager.set_current("Progress_Screen")
+									root.manager.transition.direction = "left"
+				MDBoxLayout:
+					orientation:"vertical"
+					spacing:20
+					padding:[30,30,30,10]
+					adaptive_height:True
+					pos_hint:{"center_y":.3}
+					MDLabel:
+						size_hint:.8,None
+						height:self.texture_size[1]
+						id:graph_title
+						text:"Term 1 marks"
+						font_name:"Ubuntu/Ubuntu-Medium"
+						font_size:"20sp"
+						halign:"center"
+						theme_text_color:"Custom"
+						text_color:1,1,1,1
+					MDRelativeLayout:
+						cls:"box"
+						pos_hint:{"center_y":.4,"center_x":1.35}
+						anchor_x:"right"
+						MDIconButton:
+							id:drop_btn
+							icon:"arrow-down-drop-circle-outline"
+							theme_text_color: "Custom"
+							text_color:1,1,1,1
+							on_release:
+								root.menu_box()
+								root.menu.open()
+					AKBarChart:
+						id:chart
+						bars_radius:5 
+						bars_width:"10dp"
+						size_hint_y:None
+						labels:True
+						height:"220dp"
+						y_labels:root.ylabel
+						x_values:root.Xvalues
+						y_values:root.Yvalues
+						x_labels:root.Barlabel
+						lines:True
+						labels_color:0,0,0,1
+						label_size: dp(7)
+						anim:True
+						bars_color: main_color
+						bg_color:get_color_from_hex("#f1f1f1")
+						lines_color:0,0,0,.4 #base of bars					
+				

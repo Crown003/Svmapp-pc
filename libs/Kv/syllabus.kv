@@ -1,0 +1,26 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:set color get_color_from_hex("#ffffff")
+#:set grid_background_color get_color_from_hex("#4467c4")
+#:set text_color get_color_from_hex("#4467c4") 
+<Syllabus>:
+	name:"Syllabus"
+	MDFloatLayout:
+		size_hint:1,1
+		md_bg_color:get_color_from_hex("#4467c4")
+		MDIconButton:
+			icon:"arrow-left"
+			theme_text_color: 'Custom'
+			ripple_scale:0
+			text_color: get_color_from_hex('#000000')
+			pos_hint:{"center_x":.08,"center_y":.95}
+			on_release:
+				root.manager.goback()
+				root.manager.transition.direction = "right"
+		MDLabel:
+			text:"Syllabus"
+			theme_text_color:"Custom"
+			text_color:color
+			font_name:"Ubuntu/Ubuntu-Bold"
+			font_size:"24dp"
+			pos_hint:{"center_x":.63,"center_y":.95}				
+		

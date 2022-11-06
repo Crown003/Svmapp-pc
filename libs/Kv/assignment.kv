@@ -1,0 +1,22 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+<Assignment_Screen>:
+	name:"Assignment_screen"
+	MDFloatLayout:
+		size_hint:1,1
+		minimum_height:1
+		MDIconButton:
+			icon:"arrow-left"
+			theme_text_color: 'Custom'
+			text_color: get_color_from_hex('#000000')
+			pos_hint:{"center_x":.08,"center_y":.95}
+			ripple_scale:0
+			on_release:
+				root.manager.current = "RecordArea"
+				root.manager.transition.direction = "right"
+		MDLabel:
+			text:"Assignment"
+			theme_text_color:"Custom"
+			text_color:get_color_from_hex("#ff5a46")
+			font_name:"Ubuntu/Ubuntu-Bold"
+			font_size:"24dp"
+			pos_hint:{"center_x":.63,"center_y":.95}

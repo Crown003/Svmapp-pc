@@ -1,0 +1,24 @@
+<Test>:
+	name:"Test"
+	id:test
+	MDFloatLayout:
+		size_hint:1,1
+		md_bg_color:get_color_from_hex('#ffffff')	          
+		MDIconButton:
+			icon:"arrow-left"
+			theme_text_color: 'Custom'
+			ripple_scale:0
+			text_color: get_color_from_hex('#000000')
+			pos_hint:{"center_x":.08,"center_y":.95}
+			on_release:
+				root.manager.current = "Home"
+				root.manager.transition.direction = "right"
+		MDLabel:
+			text:"Test"
+			theme_text_color:"Custom"
+			text_color:get_color_from_hex('#ff9800')
+			font_name:"Ubuntu/Ubuntu-Bold"
+			font_size:"24dp"
+			pos_hint:{"center_x":.63,"center_y":.95}
+		MDBoxLayout:
+			

@@ -1,0 +1,203 @@
+#:import ScrollEffect  kivy.effects.scroll.ScrollEffect
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import Window kivy.core.window.Window
+#:set main_color get_color_from_hex("#D63D6C")
+<Home>:
+	id:Home
+	name:"Home"
+	on_enter:
+		app.data_update() if app.data_updated == "0" else ""
+	MDFloatLayout:
+		orientation:"vertical"
+		md_bg_color:get_color_from_hex("#A6DAFF60")
+		ScrollView:
+			id:Scroll_view
+			effect_cls:"ScrollEffect"
+			do_scroll_y:True
+			MDGridLayout:
+				size_hint:1,None
+				#height:"650dp" if Window.size[0] < 2000 else "815dp"
+				cols:1
+				MDBoxLayout:
+					orientation:"vertical"
+					canvas.before:
+						Color:
+							rgba:get_color_from_hex('#2196f3')
+						Rectangle:
+							pos:self.pos
+							size:self.size
+							source:"assets/svm.jpg"
+					MDToolbar:
+				    	md_bg_color:get_color_from_hex('#ffffff01')
+				    	left_action_items: [["cog", lambda x:root.manager.set_current("Settings")]]
+				    	right_action_items:[["account-circle",lambda x:app.show_user_profile("account-circle")]]#,["cog", lambda x: root.manager.set_current("Settings")]]
+					MDFloatLayout:
+						AsyncImage:
+							id:main_page_profile
+							source:""
+							size_hint:None,None
+							height:"250px" #if Window.size[0] < 2000 else "100px"
+							width:"250px" #if Window.size[0] < 2000 else "100px"
+							pos_hint:{'center_x':.8,'center_y':.38} if Window.size[0] > 2000 else {'center_x':.75,'center_y':.45}
+							canvas.before:
+								Color:
+									rgba:get_color_from_hex('#a2d7fb')
+								RoundedRectangle:
+									radius:[20]
+									pos:self.pos
+									size:self.size
+						MDLabel:
+							id:Nlabel
+							text:app.Username
+							font_name:"Ubuntu/Ubuntu-Bold"
+							theme_text_color:"Custom"
+							text_color:get_color_from_hex('#f2f2f2')
+							font_size:"35sp" if Window.size[0] < 2000 else "45dp"
+							pos_hint:{'center_x':.8,'center_y':.45} if Window.size[0] > 2000 else{'center_x':.7,'center_y':.45}
+						MDLabel:
+							id:Clabel
+							text:app.UserClass
+							font_name:"Ubuntu/Ubuntu-Medium"
+							font_size:"20sp" if Window.size[0] > 2000 else "16sp"
+							theme_text_color:"Custom"
+							text_color:get_color_from_hex('#f2f2f2')
+							pos_hint:{'center_x':.75,'center_y':.45} if Window.size[0] > 2000 else {'center_x':.75,'center_y':.38}
+				MDGridLayout:
+					spacing:"15dp"
+					cols:1
+					padding:"20dp"
+					pos_hint:{"center_y":.2}
+					md_bg_color:get_color_from_hex("#86CCFB")
+					MDCard:
+						size_hint:1,None
+						radius:[15]
+						height:"60dp"
+						elevation:8
+						padding:10
+						md_bg_color:main_color#get_color_from_hex('#ff5a46')
+						on_release:
+							app.root.set_current("RecordArea")
+							root.manager.transition.direction = 'left'
+						MDFloatLayout:
+							size:self.size
+							pos:self.pos
+							MDIconButton:
+								icon:"account-box"
+								ripple_scale:0
+								pos_hint:{"center_x":.1,"center_y":.5}
+								user_font_size:"35dp"
+								theme_text_color: 'Custom'
+								ripple_scale:0
+								text_color: get_color_from_hex('#ffffff')
+								on_release:
+									root.manager.set_current("RecordArea")
+									root.manager.transition.direction = 'left'
+							MDTextButton:
+								text:"My Records"
+								font_name:"Ubuntu/Ubuntu-Bold"
+								theme_text_color: 'Custom'
+								ripple_scale:0
+								text_color: get_color_from_hex('#ffffff')
+								pos_hint:{"center_x":.5,"center_y":.5}
+								on_release:
+									root.manager.set_current("RecordArea")
+									root.manager.transition.direction = 'left'
+					MDCard:
+						size_hint:1,None
+						radius:[15]
+						height:"60dp"
+						elevation:10
+						md_bg_color:get_color_from_hex('#9c27b0')
+						on_release:
+							root.manager.set_current("StudyArea")
+							root.manager.transition.direction = 'left'
+						MDFloatLayout:
+							size:self.size
+							pos:self.pos
+							MDIconButton:
+								icon:"bookshelf"
+								ripple_scale:0
+								pos_hint:{"center_x":.1,"center_y":.5}	
+								user_font_size:"35dp"
+								theme_text_color: 'Custom'
+								text_color: get_color_from_hex('#ffffff')
+								on_release:
+									root.manager.set_current("StudyArea")
+									root.manager.transition.direction = 'left'
+							MDTextButton:
+								text:"Study materials"
+								font_name:"Ubuntu/Ubuntu-Bold"	
+								theme_text_color: 'Custom'
+								ripple_scale:0
+								text_color: get_color_from_hex('#ffffff')#get_color_from_hex('#2196f3')
+								pos_hint:{"center_x":.5,"center_y":.5}
+								on_release:
+									root.manager.set_current("StudyArea")
+									root.manager.transition.direction = 'left'
+					MDCard:
+						size_hint:1,None
+						radius:[15]
+						height:"60dp"
+						elevation:10
+						md_bg_color:get_color_from_hex('#009688')
+						on_release:
+							root.manager.set_current("FeesArea")
+							root.manager.transition.direction = 'left'
+						MDFloatLayout:
+							size:self.size
+							pos:self.pos
+							MDIconButton:
+								icon:"monitor-dashboard"
+								ripple_scale:0
+								pos_hint:{"center_x":.1,"center_y":.5}
+								user_font_size:"35dp"
+								theme_text_color: 'Custom'
+								ripple_scale:0
+								text_color: get_color_from_hex('#ffffff')
+								on_release:
+									root.manager.set_current("FeesArea")
+									root.manager.transition.direction = 'left'
+							MDTextButton:
+								text:"Fees"
+								font_name:"Ubuntu/Ubuntu-Bold"
+								theme_text_color: 'Custom'
+								ripple_scale:0
+								text_color: get_color_from_hex('#ffffff')
+								pos_hint:{"center_x":.5,"center_y":.5}
+								on_release:
+									root.manager.set_current("FeesArea")
+									root.manager.transition.direction = 'left'
+					MDCard:
+						size_hint:1,None
+						radius:[15]
+						height:"60dp"
+						elevation:8
+						padding:10
+						md_bg_color:get_color_from_hex('#ff9800')
+						on_release:
+							root.manager.set_current("Test")
+							root.manager.transition.direction = 'left'
+						MDFloatLayout:
+							size:self.size
+							pos:self.pos
+							MDIconButton:
+								icon:"book-education"
+								ripple_scale:0
+								pos_hint:{"center_x":.1,"center_y":.5}
+								user_font_size:"35dp"
+								theme_text_color: 'Custom'
+								text_color: get_color_from_hex('#ffffff')
+								on_release:
+									root.manager.set_current("Test")
+									root.manager.transition.direction = 'left'
+							MDTextButton:
+								text:"Test"
+								font_name:"Ubuntu/Ubuntu-Bold"
+								theme_text_color: 'Custom'
+								ripple_scale:0
+								text_color: get_color_from_hex('#ffffff')
+								pos_hint:{"center_x":.5,"center_y":.5}
+								on_release:
+									root.manager.set_current("Test")
+									root.manager.transition.direction = 'left'
+					Widget:

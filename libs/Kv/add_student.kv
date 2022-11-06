@@ -1,0 +1,106 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+<Add_Student>:
+	MDFloatLayout:
+		size_hint:1,1
+		minimum_height:1
+		md_bg_color:get_color_from_hex('#add8e6')
+		MDIconButton:
+			icon:"arrow-left"
+			theme_text_color: 'Custom'
+			text_color: 3,3,3,1
+			pos_hint:{"center_x":.08,"center_y":.95}
+			ripple_scale:0
+			on_release:
+				root.manager.current = "Teachers_interface"
+				root.manager.transition.direction = "right"
+		MDLabel:
+			text:"Add Student"
+			theme_text_color:"Custom"
+			text_color:get_color_from_hex('#ffffff')
+			font_name:"Ubuntu/Ubuntu-Bold"
+			font_size:"24dp"
+			pos_hint:{"center_x":.70,"center_y":.95}
+		ScrollView: 
+            size_hint_y: .9
+            do_scroll_y: True
+            md_bg_color:1,0,0,.4
+			MDGridLayout:
+				cols:1
+				size_hint:1,None
+				pos_hint:{"top":.9}
+				height:self.minimum_height
+				spacing:30
+				padding:20
+				MDTextField:
+					id:StuEnrollmentNumber
+					text:""
+					hint_text:"Enrollment No" 					
+					text_color:0,0,0,1
+					font_name:"Ubuntu/Ubuntu-Medium"
+					hint_text_mode:"on_focus"
+					disabled:False
+					color_mode:"custom"
+					line_color_normal:0,0,0,1
+					line_color_focus:get_color_from_hex("000000")
+				MDTextField:
+					id:StuName
+					text:""
+					hint_text:"Name" 				
+					text_color:0,0,0,1
+					font_name:"Ubuntu/Ubuntu-Medium"
+					hint_text_mode:"on_focus"
+					disabled:False
+					color_mode:"custom"
+					line_color_normal:0,0,0,1
+					line_color_focus:get_color_from_hex("000000")
+				MDTextField:
+					id:StuClass
+					text:""
+					hint_text:"Class"				 
+					text_color:0,0,0,1
+					font_name:"Ubuntu/Ubuntu-Medium"
+					hint_text_mode:"on_focus"
+					disabled:False
+					color_mode:"custom"
+					line_color_normal:0,0,0,1
+					line_color_focus:get_color_from_hex("000000")
+				MDTextField:
+					id:StuSection
+					text:""
+					hint_text:"Section" 			
+					text_color:0,0,0,1
+					font_name:"Ubuntu/Ubuntu-Medium"
+					hint_text_mode:"on_focus"
+					disabled:False
+					color_mode:"custom"
+					line_color_normal:0,0,0,1
+					line_color_focus:get_color_from_hex("000000")
+				MDTextField:
+					id:StuPhone
+					text:""
+					hint_text:"Phone" 				
+					text_color:0,0,0,1
+					font_name:"Ubuntu/Ubuntu-Medium"
+					hint_text_mode:"on_focus"
+					disabled:False #if Phone.max_text_length.text <= 10 else True
+					color_mode:"custom"
+					max_text_length:10
+					line_color_normal:0,0,0,1
+					line_color_focus:get_color_from_hex("000000")
+				AnchorLayout:
+					anchor_x:"center"
+					MDFillRoundFlatButton:
+						id:addStuButton
+						disabled : True if StuEnrollmentNumber.text == "" or StuName.text == "" or StuClass.text == "" or StuSection.text == "" or StuPhone.text == "" else False
+						text:"[b]Add Student[/b]" if addStuButton.disabled != True else "[b]Please fill the from.[/b]"
+						theme_text_color: "Custom"
+						text_color: [0,0, 1, 1]
+						radius:[20]
+						md_bg_color:[ .9,.9,.9,1] if self.disabled == True else [.9,.9,.9,1]
+						font_size:"18dp"
+						md_bg_color_disabled:[.9,.9,.9,1]
+						text_color_disabled:[1,1,1,1]
+						markup:True	
+						on_release:
+							root.add_student_from_teacher(StuEnrollmentNumber.text,StuName.text,StuClass.text,StuSection.text,StuPhone.text)
+					

@@ -1,0 +1,124 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+#:import ScrollEffect  kivy.effects.scroll.ScrollEffect
+<FeesArea>:
+	id:fees
+	name:"FeesArea"
+	MDFloatLayout:
+		size_hint:1,1
+		md_bg_color:get_color_from_hex("#009688")
+		MDIconButton:
+			icon:"arrow-left"
+			theme_text_color: 'Custom'
+			ripple_scale:0
+			text_color: get_color_from_hex('#000000')
+			pos_hint:{"center_x":.08,"center_y":.95}
+			on_release:
+				root.manager.current = "Home"
+				root.manager.transition.direction = "right"
+		MDLabel:
+			text:"Fees"
+			theme_text_color:"Custom"
+			text_color:get_color_from_hex("ffffff")
+			font_name:"Ubuntu/Ubuntu-Bold"
+			font_size:"24dp"
+			pos_hint:{"center_x":.63,"center_y":.95}
+		ScrollView:
+			effect_cls:"ScrollEffect"
+			pos_hint:{"top":.9}
+			do_scroll_y:True
+			MDBoxLayout:
+				size_hint:1,None
+				height:"820dp"
+				orientation:"vertical"
+				spacing:10
+				padding:20
+				MDCard:
+					size_hint:1,None
+					height:"80dp"
+					radius:[20]
+					md_bg_color:get_color_from_hex("#00000060")
+					AnchorLayout:
+						anchor_x:"center"
+						anchor_y:"center"
+						MDFillRoundFlatIconButton:
+							font_name:"Ubuntu/Ubuntu-Bold"
+							icon:"bank-transfer"
+							text:"Fees Deposite"
+							halign: 'center' 
+							pos_hint:{"center_x":.5}
+							md_bg_color:get_color_from_hex("#00312d")
+							font_size:"20dp"
+							theme_text_color:"Custom"
+							text_color:get_color_from_hex("#ffffff")
+				MDCard:
+					size_hint:1,None
+					height:"80dp"
+					radius:[20]
+					md_bg_color:get_color_from_hex("#00000060")
+					AnchorLayout:
+						anchor_x:"center"
+						anchor_y:"center"
+						MDFillRoundFlatIconButton:
+							font_name:"Ubuntu/Ubuntu-Bold"
+							icon:"card-text-outline"
+							text:"Fees Recepiet"
+							halign: 'center' 
+							pos_hint:{"center_x":.5}
+							font_size:"20dp"
+							md_bg_color:get_color_from_hex("#00312d")
+							theme_text_color:"Custom"
+							text_color:get_color_from_hex("#ffffff")
+				MDRelativeLayout:
+					MDLabel:
+						text:"Fees Structure"
+						color:0.9,.9,.9,1
+						pos_hint:{"center_y":.85,"center_x":.55}
+						font_name:"Ubuntu/Ubuntu-Medium"
+						font_size:"30dp"
+					MDRaisedButton:
+						id:oldfeesbtn
+						text:"[b]old students[/b]"
+						pos_hint:{"center_y":.85,"center_x":.8}
+						ripple_scale:0
+						theme_text_color:"Custom"
+						text_color:get_color_from_hex("#f2f2f2")
+						font_name:"Ubuntu/Ubuntu-Medium"
+						md_bg_color:get_color_from_hex("#00312d")
+						on_release:
+							Fees_img.source = "assets/Oldfees.jpg"
+							oldfeesbtn.text_color = get_color_from_hex("#f2f2f2")
+							newfeesbtn.text_color = get_color_from_hex("#000000")
+					MDRaisedButton:
+						id:newfeesbtn
+						text:"new students"
+						ripple_scale:0
+						theme_text_color:"Custom"
+						text_color:get_color_from_hex("#f2f2f2")
+						font_name:"Ubuntu/Ubuntu-Medium"
+						pos_hint:{"center_y":.78,"center_x":.8}
+						md_bg_color:get_color_from_hex("#00312d")
+						on_release:
+							Fees_img.source = "assets/Newfees.jpg"
+							newfeesbtn.text_color = get_color_from_hex("#f2f2f2")
+							oldfeesbtn.text_color = get_color_from_hex("#000000")			
+					MDLabel:
+						id:load_text
+						text:"Loading..."
+						halign:"center"
+						pos_hint:{"center_y":.5}
+					AnchorLayout:
+						id:fees_structure
+						pos_hint:{"center_y":.55}
+						Image:
+							id:Fees_img
+							size_hint:None,None
+							size:"500px","500px"
+							source:"assets/Newfees.jpg"
+					
+				
+			
+				
+
+			
+			

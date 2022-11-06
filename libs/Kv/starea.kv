@@ -1,0 +1,153 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:set card_color get_color_from_hex('#ffffff')
+#:set textcolor get_color_from_hex('#9c27b0')
+#:set fontcolor get_color_from_hex("#000000")
+<Icons>:
+	size_hint:root.hint
+	height:root.Height
+	radius:root.rad
+	orientation:"vertical"
+	elevation:12
+	padding:10	
+	md_bg_color:card_color 
+<StudyArea>:
+	name:"Study"	
+	MDFloatLayout:
+		size_hint:1,1
+		md_bg_color:get_color_from_hex('#9c27b0')
+		MDIconButton:
+			icon:"arrow-left"
+			theme_text_color: 'Custom'
+			ripple_scale:0
+			text_color: get_color_from_hex('#000000')
+			pos_hint:{"center_x":.08,"center_y":.95}
+			on_release:
+				root.manager.current = "Home"	
+				root.manager.transition.direction = "right"
+		MDLabel:
+			text:"Study Area"
+			theme_text_color:"Custom"
+			text_color:card_color
+			font_name:"Ubuntu/Ubuntu-Bold"
+			font_size:"24dp"
+			pos_hint:{"center_x":.63,"center_y":.95}
+	    ScrollView: 
+            size_hint_y: .9
+            do_scroll_y: True
+			MDGridLayout:
+				cols:2
+				rows:5
+				size_hint:1,None
+				pos_hint:{"top":.9}
+				height:self.minimum_height
+				spacing:30
+				padding:20
+				Icons:
+					MDFloatLayout:
+						MDIconButton:
+							icon:"book-open-page-variant"
+							pos_hint:{"center_y":.6,"center_x":.5}	
+							user_font_size:"35sp"
+							size_hint:None,None
+							theme_text_color:"Custom"
+							text_color:textcolor
+							on_release:
+								root.manager.set_current("Notes")
+								root.manager.transition.direction = "left"
+						MDLabel:
+							text:"notes"
+							size_hint:.5,None
+							size: self.texture_size
+							font_name:"Ubuntu/Ubuntu-Bold"
+							halign:"center"
+							color:fontcolor
+							pos_hint:{"center_y":.1,"center_x":.5}
+							text_color:get_color_from_hex('#ffffff')
+				#Icons:
+#					MDFloatLayout:
+#						MDIconButton:
+#							icon:"youtube-tv"
+#							pos_hint:{"center_y":.6,"center_x":.5}	
+#							user_font_size:"35sp"
+#							size_hint:None,None
+#							theme_text_color:"Custom"
+#							text_color:textcolor
+#							on_release:
+#								root.manager.current = "lecture_screen"
+#								root.manager.transition.direction = "left"
+#						MDLabel:
+#							text:"lectures"
+#							size_hint:.5,None
+#							size: self.texture_size
+#							font_name:"Ubuntu/Ubuntu-Bold"
+#							halign:"center"
+#							color:fontcolor
+#							pos_hint:{"center_y":.1,"center_x":.5}
+#							text_color:get_color_from_hex('#ffffff')
+				Icons:
+					outline:True
+					outline_color:0,0,1,1
+					MDFloatLayout:
+						MDIconButton:
+							icon:"list-status"
+							pos_hint:{"center_y":.6,"center_x":.5}	
+							user_font_size:"35sp"
+							size_hint:None,None
+							theme_text_color:"Custom"
+							text_color:textcolor
+							on_release:
+								root.manager.set_current("Questions")
+								root.manager.transition.direction = "left"
+						MDLabel:
+							text:"questions"
+							size_hint:.5,None
+							size: self.texture_size
+							font_name:"Ubuntu/Ubuntu-Bold"
+							halign:"center"
+							color:fontcolor
+							pos_hint:{"center_y":.1,"center_x":.5}
+							text_color:get_color_from_hex('#ffffff')
+				Icons:
+					on_release:
+						root.manager.current = "Syllabus"
+					MDFloatLayout:
+						MDIconButton:
+							icon:"format-list-text"
+							pos_hint:{"center_y":.6,"center_x":.5}	
+							user_font_size:"35sp"
+							size_hint:None,None
+							theme_text_color:"Custom"
+							text_color:textcolor
+							on_release:
+								root.manager.set_current("Syllabus")
+								root.manager.transition.direction = "left"
+						MDLabel:
+							text:"syllabus"
+							size_hint:.5,None
+							size: self.texture_size
+							font_name:"Ubuntu/Ubuntu-Bold"
+							halign:"center"
+							color:fontcolor
+							pos_hint:{"center_y":.1,"center_x":.5}
+							text_color:get_color_from_hex('#ffffff')
+				Icons:
+					MDFloatLayout:
+						MDIconButton:
+							icon:"more"
+							pos_hint:{"center_y":.6,"center_x":.5}	
+							user_font_size:"35sp"
+							size_hint:None,None
+							theme_text_color:"Custom"
+							text_color:textcolor
+							on_release:
+								root.manager.current = "Home"
+						MDLabel:
+							text:"more"
+							size_hint:.5,None
+							size: self.texture_size
+							font_name:"Ubuntu/Ubuntu-Bold"
+							halign:"center"
+							color:fontcolor
+							pos_hint:{"center_y":.1,"center_x":.5}
+							text_color:get_color_from_hex('#ffffff')
+				

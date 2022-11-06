@@ -1,0 +1,155 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex	
+#:import SlideTransition  kivy.uix.screenmanager.SlideTransition  
+#:import ScrollEffect  kivy.effects.scroll
+<About_School@Screen>:	
+Screen:
+	MDNavigationLayout:
+		ScreenManager:
+			Home:
+				id:Home
+				name:"Home"
+				MDToolbar:
+					id: toolbar
+					md_bg_color:get_color_from_hex('#ffffff01')
+					pos_hint: {"top": 1}
+					specific_text_color: get_color_from_hex('#a2d7fb')
+					left_action_items: [["menu", lambda x: nav_drawer.set_state('open'),"navbar"]]
+					right_action_items:[["bell-outline",lambda x:x,"notifications"]]
+		MDNavigationDrawer:
+            id: nav_drawer
+            size_hint:None,1
+            width:"300dp"
+            MDBoxLayout:
+	        	md_bg_color:get_color_from_hex("f3f3f3")#app.theme_cls.primary_dark if app.theme_cls.theme_style == "Dark" else app.theme_cls.primary_light#get_color_from_hex('#a2d7fb')
+	            orientation:"vertical"
+	            padding:[20,0,20,0]
+	            spacing:15
+	            MDRelativeLayout:
+                    size_hint_y: None
+                    height: title_box.height
+
+                    FitImage:
+                        source: "assets/svm.jpg"
+
+                    MDBoxLayout:
+                        id: title_box
+                        adaptive_height: True
+                        padding: dp(24) 
+                                       
+			            AnchorLayout:
+			            	anchor_x:"center"
+			            	size_hint:1,None
+			            	height:"210dp"
+			            	
+			            	MDFloatLayout:
+			            		
+								MDLabel:
+									id:label
+									text:"Sarswati vidiya mandir"
+									font_name:"Ubuntu/Ubuntu-Medium"
+									size_hint_y:None
+									shorten: True
+									font_size:"22dp"
+									color:get_color_from_hex("f2f2f2")
+									height:self.texture_size[1]
+									pos_hint:{"center_x":.45,"center_y":.15}
+								MDLabel:
+									id:label
+									text: "slnsultanpur@gmail.com"
+									font_name:"Ubuntu/Ubuntu-bold"
+									size_hint_y:None
+									shorten: True
+									font_size:"14dp"
+									color:get_color_from_hex("f2f2f2")
+									height:self.texture_size[1]
+									pos_hint:{"center_x":.45,"center_y":.05}
+				MDSeparator:
+				ScrollView:
+					do_scroll_y:True
+					MDCard:
+						elevation:0
+						orientation:"vertical"
+						md_bg_color:get_color_from_hex('#2196f3')
+						radius:[30,30,0,0]
+						padding:10
+						spacing:15
+						ScrollView:
+							MDCard:
+								id:card
+								size_hint_y:None
+								height:self.minimum_height
+								orientation:"vertical"
+								elevation:0
+								radius:[30,30,30,30]
+								md_bg_color:get_color_from_hex("#0000ff30")
+								MDList:
+									OneLineIconListItem:
+										text:"My profile"
+										theme_text_color:"Custom"
+										text_color:1,1,1,1
+										on_release:
+											nav_drawer.set_state('close')
+											app.show_user_profile(btn_acc.icon)
+										IconLeftWidget:
+									    	id:btn_acc
+									    	icon: "account-circle"
+									    	theme_text_color:"Custom"
+									    	text_color:1,1,1,1
+									    	ripple_scale:0
+									    	on_release:
+												nav_drawer.set_state('close')
+												app.show_user_profile(btn_acc.icon)
+									OneLineIconListItem:
+									    text:"About School"
+									    theme_text_color:"Custom"
+									    text_color:1,1,1,1
+										on_release:
+											nav_drawer.set_state('close')
+											app.show_About()
+									    IconLeftWidget:
+									    	icon: "school"
+									    	theme_text_color:"Custom"
+									    	text_color:1,1,1,1
+									    	ripple_scale:0
+									    	on_release:
+												nav_drawer.set_state('close')
+												app.show_About()
+									OneLineIconListItem:
+								    	text:"Support"
+								    	theme_text_color:"Custom"
+								    	text_color:1,1,1,1 
+										on_release:
+											nav_drawer.set_state('close')
+								    	IconLeftWidget:
+								    		icon: "help-circle"
+								    		theme_text_color:"Custom"
+								    		text_color:1,1,1,1
+								    		on_release:
+												nav_drawer.set_state('close')
+									OneLineIconListItem:
+								    	text:"Setting"
+								    	theme_text_color:"Custom"
+								    	text_color:1,1,1,1 
+										on_release:
+											nav_drawer.set_state('close')
+								    	IconLeftWidget:
+								    		icon: "cog"
+								    		theme_text_color:"Custom"
+								    		text_color:1,1,1,1
+								    		on_release:
+												nav_drawer.set_state('close')
+									OneLineIconListItem:
+								    	text:"Logout"
+								    	theme_text_color:"Custom"
+								    	text_color:1,1,1,1 
+										on_release:
+											app.show_dialog()
+											nav_drawer.set_state('close')
+								    	IconLeftWidget:
+								    		icon: "logout"
+								    		theme_text_color:"Custom"
+								    		text_color:1,1,1,1
+								    		on_release:
+								    			app.show_dialog("student")
+												nav_drawer.set_state('close')
+									Widget:

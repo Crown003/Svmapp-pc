@@ -1,0 +1,135 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<MyAKLineChart@AKLineChart>
+    size_hint_y: None
+    height: dp(180)  
+    label_size: dp(9)
+    labels_color:get_color_from_hex("#000000")
+
+<Progress_Screen>:
+	name:"Progress_Screen"
+	on_enter:
+		self.update_line_chart()
+	MDFloatLayout:
+		size_hint:1,1
+		minimum_height:1
+		MDIconButton:
+			icon:"arrow-left"
+			theme_text_color: 'Custom'
+			text_color: get_color_from_hex('#000000')
+			pos_hint:{"center_x":.08,"center_y":.95}
+			ripple_scale:0
+			on_release:
+				root.manager.current = "RecordArea"
+				root.manager.transition.direction = "right"
+		MDLabel:
+			text:"Progress"
+			theme_text_color:"Custom"
+			text_color:get_color_from_hex("#ff5a46")
+			font_name:"Ubuntu/Ubuntu-Bold"
+			font_size:"24dp"
+			pos_hint:{"center_x":.63,"center_y":.95}
+		ScrollView:
+			size_hint:(1,.9)
+            MDBoxLayout:
+                orientation: "vertical"
+                spacing: dp(25)
+                padding: dp(25)
+                adaptive_height: True
+                md_bg_color:get_color_from_hex("#ff5a46")
+                MDCard:
+                	orientation:"vertical"
+                	size_hint:.98,None
+                	height:"300dp"
+                	md_bg_color:get_color_from_hex("#ffffff")
+                	radius:[35]
+                	elevation:18
+                	padding:10
+                	spacing:16
+                	pos_hint:{"center_x":.5}
+                	Label:
+                		size_hint:1,None
+                		size:self.texture_size
+                		text:"[u]Your Test Report[/u]"
+                		markup:True
+                		halign:"center"
+                		font_size:"22dp"
+                		pos_hint:{"center_y":.95}
+                		color:get_color_from_hex("#ff5a46")
+                		font_name:"Ubuntu/Ubuntu-Bold"
+                	MDGridLayout:
+                		size_hint:1,.9
+                		cols:2
+                		row:5
+                		MDLabel:
+                			halign:"center"
+                			color:get_color_from_hex("#000000")
+                			text:"Unit 1"
+                			font_name:"Ubuntu/Ubuntu-Medium"
+                		MDLabel:
+                			id:Unit1_percent_marks
+                			halign:"center"
+                			text:"loading.."
+                			color:get_color_from_hex("#000000")
+                			font_name:"Ubuntu/Ubuntu-Medium"
+                		MDLabel:
+                			halign:"center"
+                			text:"Unit 2"
+                			color:get_color_from_hex("#000000")
+                			font_name:"Ubuntu/Ubuntu-Medium"
+                		MDLabel:
+                			id:Unit2_percent_marks
+                			text:"loading.."
+                			halign:"center"
+                			color:get_color_from_hex("#000000")
+                			font_name:"Ubuntu/Ubuntu-Medium"
+                		MDLabel:
+                			text:"Unit 3"
+                			halign:"center"
+                			color:get_color_from_hex("#000000")
+                			font_name:"Ubuntu/Ubuntu-Medium"
+                		MDLabel:
+                			id:Unit3_percent_marks
+                			text:"loading..}"
+                			halign:"center"
+                			color:get_color_from_hex("#000000")
+                			font_name:"Ubuntu/Ubuntu-Medium"
+                		MDLabel:
+                			text:"Half yearly"
+                			halign:"center"
+                			color:get_color_from_hex("#000000")
+                			font_name:"Ubuntu/Ubuntu-Medium"
+                		MDLabel:
+                			id:Halfyearly_percent_marks
+                			text:"loading.."
+                			halign:"center"
+                			color:get_color_from_hex("#000000")
+                			font_name:"Ubuntu/Ubuntu-Medium"
+                		MDLabel:
+                			text:"Final"
+                			halign:"center"
+                			color:get_color_from_hex("#000000")
+                			font_name:"Ubuntu/Ubuntu-Medium"
+                		MDLabel:
+                			id:Final_percent_marks
+                			text:"loading.."
+                			halign:"center"	
+                			font_name:"Ubuntu/Ubuntu-Medium"
+                			color:get_color_from_hex("#000000")	
+                MyAKLineChart:
+                    id: chart1
+                    labels: True
+                    anim: True
+                    x_values:[1,2,3]
+                    y_values:[20,20,18]
+                    x_labels: ["XYZ", "Second", "Third"]
+                    y_labels: ["XYZ", "Second", "Third"]
+                    bg_color:1,1,1,1
+                    lines_color:get_color_from_hex("#ff5a46")
+                    circles_color: [0.4, 0.4, 1, 1]
+                    
+                MDLabel:
+                	text:"Your progress graph"
+                	halign:"center"
+                	font_name:"Ubuntu/Ubuntu-Bold"
+				

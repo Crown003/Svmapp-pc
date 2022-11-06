@@ -1,0 +1,275 @@
+#:import ScrollEffect  kivy.effects.scroll.ScrollEffect
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+#<ListItemWithIcon>:
+
+#    IconLeftWidget:
+#        icon: "youtube"
+#        theme_text_color:"Custom"
+#		text_color:1,1,1,.8
+
+#<Lecture>:
+#	name:"lecture_screen"
+#	MDBottomNavigation:
+#		text_color_active:get_color_from_hex("f1f1f1")
+#        panel_color: get_color_from_hex("693CFF")
+#		MDBottomNavigationItem:
+#			name: 'physic_screen'
+#			text: 'Physic'
+#			icon: 'alpha-p-circle-outline'
+#			MDFloatLayout:
+#				size_hint:1,1
+#				md_bg_color:get_color_from_hex('693CFF')
+#				MDIconButton:
+#					icon:"arrow-left"
+#					theme_text_color: 'Custom'
+#					ripple_scale:0
+#					text_color: get_color_from_hex('#000000')
+#					pos_hint:{"center_x":.08,"center_y":.95}
+#					on_release:
+#						root.manager.current = "Study"
+#						root.manager.transition.direction = "right"
+#				MDLabel:
+#					text:"Lecture"
+#					theme_text_color:"Custom"
+#					text_color:get_color_from_hex("ffffff")
+#					font_name:"Ubuntu/Ubuntu-Bold"
+#					font_size:"24dp"
+#					pos_hint:{"center_x":.63,"center_y":.95}
+#			
+#			ScrollView:
+#				effect_cls:"ScrollEffect"
+#				size_hint:(1,.9)
+#				do_scroll_y:True
+#				MDGridLayout:
+#					id:lecture_card_p
+#					spacing:10
+#					size_hint:(1,None)
+#					cols:1
+#					height:"900dp"
+#					ListItemWithIcon:
+#						id:Physic1
+#						text: f"{root.p[0]}"
+#						font_style:"Button"
+#						theme_text_color:"Custom"
+#						text_color:(1,1,1,1)
+#						on_release:
+#							root.add_videos(Physic1.text)
+#					#ListItemWithIcon:
+#						id:Physic2
+#						text: f"{root.p[1]}"
+#						font_style:"Button"
+#						theme_text_color:"Custom"
+#						text_color:(1,1,1,1)
+#						on_release:
+#							root.add_videos(Physic2.text)
+#					ListItemWithIcon:
+#						id:Physic3
+#						text: f"{root.p[2]}"
+#						font_style:"Button"
+#						theme_text_color:"Custom"
+#						text_color:(1,1,1,1)
+#						on_release:
+#							root.add_videos(Physic3.text)
+#					ListItemWithIcon:
+#						id:Physic4
+#						text: f"{root.p[3]}"
+#						font_style:"Button"
+#						theme_text_color:"Custom"
+#						text_color:(1,1,1,1)
+#						on_release:
+#							root.add_videos(Physic4.text)
+#					ListItemWithIcon:
+#						id:Physic5
+#						text: f"{root.p[4]}"
+#						font_style:"Button"
+#						theme_text_color:"Custom"
+#						text_color:(1,1,1,1)
+#						on_release:
+#							root.add_videos(Physic5.text)
+#					ListItemWithIcon:
+#						id:Physic6
+#						text: f"{root.p[5]}"
+#						font_style:"Button"
+#						theme_text_color:"Custom"
+#						text_color:(1,1,1,1)
+#						on_release:
+#							root.add_videos(Physic6.text)
+#					ListItemWithIcon:
+#						id:Physic7
+#						text: f"{root.p[6]}"
+#						font_style:"Button"
+#						theme_text_color:"Custom"
+#						text_color:(1,1,1,1)
+#						on_release:
+#							root.add_videos(Physic7.text)
+#					ListItemWithIcon:
+#						id:Physic8
+#						text: f"{root.p[7]}"
+#						font_style:"Button"
+#						theme_text_color:"Custom"
+#						text_color:(1,1,1,1)
+#						on_release:
+#							root.add_videos(Physic8.text)
+#					ListItemWithIcon:
+#						id:Physic9
+#						text: f"{root.p[8]}"
+#						font_style:"Button"
+#						theme_text_color:"Custom"
+#						text_color:(1,1,1,1)
+#						on_release:
+#							root.add_videos(Physic9.text)
+#					ListItemWithIcon:
+#						id:Physic10
+#						text: f"{root.p[9]}"
+#						font_style:"Button"
+#						theme_text_color:"Custom"
+#						text_color:(1,1,1,1)
+#						on_release:
+#							root.add_videos(Physic10.text)
+#					ListItemWithIcon:
+#						id:Physic11
+#						text: f"{root.p[10]}"
+#						font_style:"Button"
+#						theme_text_color:"Custom"
+#						text_color:(1,1,1,1)
+#						on_release:
+#							root.add_videos(Physic11.text)
+#					ListItemWithIcon:
+#						id:Physic12
+#						text: f"{root.p[11]}"
+#						font_style:"Button"
+#						theme_text_color:"Custom"
+#						text_color:(1,1,1,1)
+#						on_release:
+#							root.add_videos(Physic12.text)
+#					ListItemWithIcon:
+#						id:Physic13
+#						text: f"{root.p[12]}"
+#						font_style:"Button"
+#						theme_text_color:"Custom"
+#						text_color:(1,1,1,1)
+#						on_release:
+#							root.add_videos(Physic13.text)
+#					ListItemWithIcon:
+#						id:Physic14
+#						text: f"{root.p[13]}"
+#						font_style:"Button"
+#						theme_text_color:"Custom"
+#						text_color:(1,1,1,1)
+#						on_release:
+#							root.add_videos(Physic14.text)
+#					ListItemWithIcon:
+#						id:Physic15
+#						text: f"{root.p[14]}"
+#						font_style:"Button"
+#						theme_text_color:"Custom"
+#						text_color:(1,1,1,1)
+#						on_release:
+#							root.add_videos(Physic15.text)
+#        
+#						
+#		MDBottomNavigationItem:
+#		    name: 'screen 2'
+#			text: 'Chemistry'
+#		    icon: 'alpha-c-circle-outline'
+#		    MDFloatLayout:
+#				size_hint:1,1
+#				md_bg_color:get_color_from_hex('693CFF')
+#				MDIconButton:
+#					icon:"arrow-left"
+#					theme_text_color: 'Custom'
+#					ripple_scale:0
+#					text_color: get_color_from_hex('#000000')
+#					pos_hint:{"center_x":.08,"center_y":.95}
+#					on_release:
+#						root.manager.current = "Study"
+#						root.manager.transition.direction = "right"
+#				MDLabel:
+#					text:"Lecture"
+#					theme_text_color:"Custom"
+#					text_color:get_color_from_hex("ffffff")
+#					font_name:"Ubuntu/Ubuntu-Bold"
+#					font_size:"24dp"
+#					pos_hint:{"center_x":.63,"center_y":.95}
+#					
+#			ScrollView:
+#				effect_cls:"ScrollEffect"
+#				size_hint:(1,.9)
+#				do_scroll_y:True
+#				MDGridLayout:
+#					id:lecture_card_c
+#					spacing:10
+#					size_hint:(1,None)
+#					cols:1
+#					height:"950dp"
+#		
+#		MDBottomNavigationItem:
+#		    name: 'screen 3'
+#		    text: 'Maths'
+#		    icon: 'alpha-m-circle-outline'
+#		    MDFloatLayout:
+#				size_hint:1,1
+#				md_bg_color:get_color_from_hex('693CFF')
+#				MDIconButton:
+#					icon:"arrow-left"
+#					theme_text_color: 'Custom'
+#					ripple_scale:0
+#					text_color: get_color_from_hex('#000000')
+#					pos_hint:{"center_x":.08,"center_y":.95}
+#					on_release:
+#						root.manager.current = "Study"
+#						root.manager.transition.direction = "right"
+#				MDLabel:
+#					text:"Lecture"
+#					theme_text_color:"Custom"
+#					text_color:get_color_from_hex("ffffff")
+#					font_name:"Ubuntu/Ubuntu-Bold"
+#					font_size:"24dp"
+#					pos_hint:{"center_x":.63,"center_y":.95}
+#					
+#			ScrollView:
+#				effect_cls:"ScrollEffect"
+#				size_hint:(1,.9)
+#				do_scroll_y:True
+#				MDGridLayout:
+#					id:lecture_card_m
+#					spacing:10
+#					size_hint:(1,None)
+#					cols:1
+#					height:"820dp"
+#		MDBottomNavigationItem:
+#		    name: 'screen 4'
+#		    text: 'Cs'
+#		    icon: 'language-python'
+#		    MDFloatLayout:
+#				size_hint:1,1
+#				md_bg_color:get_color_from_hex('693CFF')
+#				MDIconButton:
+#					icon:"arrow-left"
+#					theme_text_color: 'Custom'
+#					ripple_scale:0
+#					text_color: get_color_from_hex('#000000')
+#					pos_hint:{"center_x":.08,"center_y":.95}
+#					on_release:
+#						root.manager.current = "Study"
+#						root.manager.transition.direction = "right"
+#				MDLabel:
+#					text:"Lecture"
+#					theme_text_color:"Custom"
+#					text_color:get_color_from_hex("ffffff")
+#					font_name:"Ubuntu/Ubuntu-Bold"
+#					font_size:"24dp"
+#					pos_hint:{"center_x":.63,"center_y":.95}
+#					
+#			ScrollView:
+#				effect_cls:"ScrollEffect"
+#				size_hint:(1,.9)
+#				do_scroll_y:True
+#				MDGridLayout:
+#					id:lecture_card_cs
+#					spacing:10
+#					size_hint:(1,None)
+#					cols:1
+#					height:"990dp"
+#				

@@ -1,0 +1,126 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:set primaryColor get_color_from_hex("#FFF9C4")
+#:set textColor get_color_from_hex("#f2f2f2")
+<Settings>:
+	name:"Settings"
+	id:profile
+	MDFloatLayout:
+		size_hint:1,1
+		minimum_height:1
+		md_bg_color:main_color
+		MDIconButton:
+			icon:"arrow-left"
+			theme_text_color: 'Custom'
+			text_color:textColor
+			pos_hint:{"center_x":.08,"center_y":.95}
+			ripple_scale:0
+			on_release:
+				root.manager.transition.direction = "left"
+				root.manager.current = "Home"
+				root.manager.transition.direction= "right"
+		MDLabel:
+			text:"Settings"
+			theme_text_color:"Custom"
+			text_color:textColor
+			font_name:"Ubuntu/Ubuntu-Bold"
+			font_size:"24dp"
+			pos_hint:{"center_x":.63,"center_y":.95}
+		ScrollView:
+			effect_cls:"ScrollEffect"
+			pos_hint:{"top":.9}
+			MDBoxLayout:
+				orientation:"vertical"
+				size_hint:1,None
+				height:"850dp" if Window.size[0] > 2000 else "820dp"				
+				MDGridLayout:
+					size_hint_x:1
+					cols:1   
+					spacing:"20dp"    
+					MDList:
+						OneLineIconListItem:
+							text:"My account"
+							theme_text_color:"Custom"
+							text_color:1,1,1,1
+							on_release:
+								app.show_user_profile("settings")
+							IconLeftWidget:
+								icon: "account-circle"
+								theme_text_color:"Custom"
+								text_color:1,1,1,1
+								ripple_scale:0
+								on_release:
+									app.show_user_profile("settings")
+						OneLineIconListItem:
+							text:"Contact Us"
+							theme_text_color:"Custom"
+							text_color:1,1,1,1
+							IconLeftWidget:
+								icon: "contacts"
+								theme_text_color:"Custom"
+								text_color:1,1,1,1
+								ripple_scale:0
+						OneLineIconListItem:
+							text:"Support"
+							theme_text_color:"Custom"
+							text_color:1,1,1,1
+							IconLeftWidget:
+								icon: "help-circle"
+								theme_text_color:"Custom"
+								text_color:1,1,1,1
+								ripple_scale:0
+						OneLineIconListItem:
+							text:"About School"
+							theme_text_color:"Custom"
+							text_color:1,1,1,1
+							on_release:
+								app.root.set_current("About_School")
+							IconLeftWidget:
+								icon: "school"
+								theme_text_color:"Custom"
+								text_color:1,1,1,1
+								ripple_scale:0
+								on_release:
+									app.root.set_current("About_School")
+									#app.show_About()
+						OneLineIconListItem:
+							text:"Logout"
+							theme_text_color:"Custom"
+							text_color:1,1,1,1
+							on_release:
+								app.show_dialog("student")
+							IconLeftWidget:
+								icon: "logout"
+								theme_text_color:"Custom"
+								text_color:1,1,1,1
+								ripple_scale:0
+								#on_release:
+#									app.show_dialog("student")
+					AnchorLayout:		
+						bg_color:1,0,0,1	
+						AsyncImage:
+							source: "assets/svm.jpg"
+							size_hint:None,None
+							height:"450dp"
+							width:"400dp"
+						MDFloatLayout:
+							MDLabel:
+								id:label
+								text:"Sarswati vidiya mandir"
+								font_name:"Ubuntu/Ubuntu-Medium"
+								size_hint_y:None
+								shorten: True
+								font_size:"30dp"
+								pos_hint:{"center_y":.15}
+								color:get_color_from_hex("f2f2f2")
+							MDLabel:
+								id:label
+								text: "slnsultanpur@gmail.com[sub][size=12sp] \nversion 1.0[/size][/sub]"
+								font_name:"Ubuntu/Ubuntu-bold"
+								size_hint_y:None
+								markup:True
+								shorten: True
+								font_size:"18dp"
+								pos_hint:{"center_y":.05} 
+								color:get_color_from_hex("f2f2f2")
+					Widget:
+								

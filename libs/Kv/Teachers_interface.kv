@@ -1,0 +1,103 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+<Teachers_interface>:
+	MDFloatLayout:
+		size_hint:1,1
+		minimum_height:1
+		md_bg_color:get_color_from_hex('#ff9800')
+		MDIconButton:
+			icon:"logout"
+			theme_text_color: 'Custom'
+			text_color: 3,3,3,1
+			pos_hint:{"center_x":.08,"center_y":.95}
+			ripple_scale:0
+			on_release:
+				app.show_dialog("teacher")
+				root.manager.transition.direction = "right"
+		MDLabel:
+			text:"Welcome teacher"
+			theme_text_color:"Custom"
+			text_color:get_color_from_hex('#ffffff')
+			font_name:"Ubuntu/Ubuntu-Bold"
+			font_size:"24dp"
+			pos_hint:{"center_x":.70,"center_y":.95}
+		ScrollView: 
+            size_hint_y: .9
+            do_scroll_y: True
+            md_bg_color:1,0,0,.4
+			MDGridLayout:
+				cols:1
+				rows:5
+				size_hint:1,None
+				pos_hint:{"top":.9}
+				height:self.minimum_height
+				spacing:30
+				padding:20
+				MDCard:
+					size_hint:1,None
+					height:"120dp"
+					radius:[20]
+					MDFloatLayout:
+						MDIconButton:
+							icon:"table-account"
+							pos_hint:{"center_y":.6,"center_x":.5}	
+							user_font_size:"45sp"
+							size_hint:None,None
+							theme_text_color:"Custom"
+							text_color:get_color_from_hex(("000000"))#0,0,0,1
+							on_release:
+								root.manager.set_current("Student_Details")
+								root.manager.transition.direction = "left"
+						MDLabel:
+							text:"Students Details"
+							size_hint:.5,None
+							size: self.texture_size
+							font_name:"Ubuntu/Ubuntu-Bold"
+							halign:"center"
+							color:get_color_from_hex(("000000"))
+							pos_hint:{"center_y":.1,"center_x":.5}
+				MDCard:
+					size_hint:1,None
+					height:"120dp"
+					radius:[20]
+					MDFloatLayout:
+						MDIconButton:
+							icon:"account-plus"
+							pos_hint:{"center_y":.6,"center_x":.5}	
+							user_font_size:"45sp"
+							size_hint:None,None
+							theme_text_color:"Custom"
+							text_color:get_color_from_hex(("000000"))#0,0,0,1
+							on_release:
+								root.manager.set_current("Add_Student")
+								root.manager.transition.direction = "left"
+						MDLabel:
+							text:"Add New Students"
+							size_hint:.5,None
+							size: self.texture_size
+							font_name:"Ubuntu/Ubuntu-Bold"
+							halign:"center"
+							color:get_color_from_hex(("000000"))
+							pos_hint:{"center_y":.1,"center_x":.5}
+				MDCard:
+					size_hint:1,None
+					height:"120dp"
+					radius:[20]
+					MDFloatLayout:
+						MDIconButton:
+							icon:"account-minus"
+							pos_hint:{"center_y":.6,"center_x":.5}	
+							user_font_size:"45sp"
+							size_hint:None,None
+							theme_text_color:"Custom"
+							text_color:get_color_from_hex(("000000"))#0,0,0,1
+							on_release:
+								root.manager.set_current("Remove_Student")
+								root.manager.transition.direction = "left"
+						MDLabel:
+							text:"Remove Students"
+							size_hint:.5,None
+							size: self.texture_size
+							font_name:"Ubuntu/Ubuntu-Bold"
+							halign:"center"
+							color:get_color_from_hex(("000000"))
+							pos_hint:{"center_y":.1,"center_x":.5}							

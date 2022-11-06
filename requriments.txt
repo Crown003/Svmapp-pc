@@ -1,0 +1,13 @@
+akivymd==1.2.1
+DateTime==4.4
+Kivy==2.0.0
+kivymd==0.104.2
+KivyMD-Components==0.1.6
+kivymd-extensions==1.0.0
+kivymd-extensions.akivymd==1.2.6
+pillow==9.0.0
+multitasking
+plyer==2.0.0
+pymongo==3.12.1
+requests==2.23.0
+

@@ -1,0 +1,122 @@
+{
+    "Home":{
+        "import": "from libs.baseclass.home import Home",
+        "object": "Home()",
+        "kv": "libs/kv/home.kv"
+    },
+    "LoginPage": {
+        "import": "from libs.baseclass.login import LoginPage",
+        "object": "LoginPage()",
+        "kv": "libs/kv/login.kv"
+    },
+    "RecordArea": {
+        "import": "from libs.baseclass.records import RecordArea",
+        "object": "RecordArea()",
+        "kv": "libs/kv/records.kv"
+    },
+    "StudyArea": {
+        "import": "from libs.baseclass.starea import StudyArea",
+        "object": "StudyArea()",
+        "kv": "libs/kv/starea.kv"
+    },
+    "About_School": {
+        "import": "from libs.baseclass.About import About_School",
+        "object": "About_School()",
+        "kv": "libs/kv/About.kv"
+    },
+    "FeesArea": {
+        "import": "from libs.baseclass.feesarea import FeesArea",
+        "object": "FeesArea()",
+        "kv": "libs/kv/feesarea.kv"
+    },
+    "Test": {
+        "import": "from libs.baseclass.Test import Test",
+        "object": "Test()",
+        "kv": "libs/kv/Test.kv"
+    },
+    "Profile": {
+        "import": "from libs.baseclass.profile import Profile",
+        "object": "Profile()",
+        "kv": "libs/kv/profile.kv"
+    },
+    "Assignment_Screen": {
+        "import": "from libs.baseclass.assignment import Assignment_Screen",
+        "object": "Assignment_Screen()",
+        "kv": "libs/kv/assignment.kv"
+    },
+    "Progress_Screen": {
+        "import": "from libs.baseclass.progress import Progress_Screen",
+        "object": "Progress_Screen()",
+        "kv": "libs/kv/progress.kv"
+    },
+    "Notes": {
+        "import": "from libs.baseclass.notes import Notes",
+        "object": "Notes()",
+        "kv": "libs/kv/notes.kv"
+    },
+    "Syllabus": {
+        "import": "from libs.baseclass.syllabus import Syllabus",
+        "object": "Syllabus()",
+        "kv": "libs/kv/syllabus.kv"
+    },
+    "Questions": {
+        "import": "from libs.baseclass.questions import Questions",
+        "object": "Questions()",
+        "kv": "libs/kv/questions.kv"
+    },
+    "Cs_notes": {
+        "import": "from libs.baseclass.cs import Cs_notes",
+        "object": "Cs_notes()",
+        "kv": "libs/kv/cs.kv"
+    },
+    "Physics_notes": {
+        "import": "from libs.baseclass.physic import Physics_notes",
+        "object": "Physics_notes()",
+        "kv": "libs/kv/physics.kv"
+    },
+    "Maths_notes": {
+        "import": "from libs.baseclass.maths import Maths_notes",
+        "object": "Maths_notes()",
+        "kv": "libs/kv/maths.kv"
+    },
+    "Ip_notes": {
+        "import": "from libs.baseclass.ip import Ip_notes",
+        "object": "Ip_notes()",
+        "kv": "libs/kv/ip.kv"
+    },
+    "English_notes": {
+        "import": "from libs.baseclass.english import English_notes",
+        "object": "English_notes()",
+        "kv": "libs/kv/english.kv"
+    },
+    "Chemistry_notes": {
+        "import": "from libs.baseclass.chemistry import Chemistry_notes",
+        "object": "Chemistry_notes()",
+        "kv": "libs/kv/chemistry.kv"
+    },
+    "Student_Details": {
+        "import": "from libs.baseclass.Students_Details import Student_Details",
+        "object": "Student_Details()",
+        "kv": "libs/kv/Students_Details.kv"
+    },
+    "Teachers_interface": {
+        "import": "from libs.baseclass.Teachers_interface import Teachers_interface",
+        "object": "Teachers_interface()",
+        "kv": "libs/kv/Teachers_interface.kv"
+    },
+    "Settings": {
+        "import": "from libs.baseclass.Settings import Settings",
+        "object": "Settings()",
+        "kv": "libs/kv/Settings.kv"
+    },
+    "Add_Student": {
+        "import": "from libs.baseclass.add_student import Add_Student",
+        "object": "Add_Student()",
+        "kv": "libs/kv/add_student.kv"
+    },
+    "Remove_Student": {
+        "import": "from libs.baseclass.rmv_student import Rmv_Student",
+        "object": "Rmv_Student()",
+        "kv": "libs/kv/rmv_student.kv"
+    }
+}
