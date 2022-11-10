@@ -8,6 +8,7 @@ from kivy import platform
 from PIL import Image
 from kivymd.uix.snackbar import Snackbar
 from kivymd.toast import toast
+from os import getcwd as cwd
 
 if platform != "android":
 	from plyer import filechooser
@@ -28,7 +29,7 @@ class Profile(Screen):
 	def select_path(self, path):
 		if platform != "android":
 			if path:
-				with open(r"C:\Users\global\Desktop\csproject12\Svmapp-master\Svmapp-master\Modules\loginfo.txt","r") as f:
+				with open(cwd() + r"\Modules\loginfo.txt","r") as f:
 					logged = f.read().split(",")
 					self.upload_image_details = [logged[7],path[0]]
 					self.upload_profile_photo(self.upload_image_details[0],self.upload_image_details[1])	
@@ -38,7 +39,7 @@ class Profile(Screen):
 	def exit_manager(self, *args):
 		self.manager_open = False
 		if args[0] != 1:
-			with open(r"C:\Users\global\Desktop\csproject12\Svmapp-master\Svmapp-master\Modules\loginfo.txt","r") as f:
+			with open(cwd() + r"/Modules/loginfo.txt","r") as f:
 				logged = f.read().split(",")
 				self.upload_image_details = [logged[7],args[0]]
 				self.upload_profile_photo(self.upload_image_details[0],self.upload_image_details[1])		
@@ -97,8 +98,12 @@ class Profile(Screen):
 		self.ids.class_field.text = Class.text
 		self.ids.contact_field.text = Phone.text	
 		self.ids.email_field.text = Email.text
-		with open(r"C:\Users\global\Desktop\csproject12\Svmapp-master\Svmapp-master\Modules\loginfo.txt","r") as f:
-			data = f.read().split(",")
+		if platform != "android":
+			with open(cwd() + r"\Modules\loginfo.txt","r") as f:
+				data = f.read().split(",")
+		else:
+			with open(cwd() + r"/Modules/loginfo.txt","r") as f:
+				data = f.read().split(",")
 		role = data[1]
 		sec = data[4]
 		phone = data[5]
@@ -119,9 +124,14 @@ class Profile(Screen):
 			UnitTwoMarks = []
 			UnitThreeMarks = []
 			PresentDays = 60
-			with open(r"C:\Users\global\Desktop\csproject12\Svmapp-master\Svmapp-master\Modules\loginfo.txt","w+") as f:
-				f.write(f"logged,{Role},{User},{Class},{Sec},{Phone},{Email},{Enrollment_no},{UnitOneMarks},{UnitTwoMarks},{UnitThreeMarks},{PresentDays}")
-			toast(text="updated successfully",gravity=80)
+			if platform != "android":
+				with open(cwd() + r"\Modules\loginfo.txt","w+") as f:
+					f.write(f"logged,{Role},{User},{Class},{Sec},{Phone},{Email},{Enrollment_no},{UnitOneMarks},{UnitTwoMarks},{UnitThreeMarks},{PresentDays}")
+			
+			else:
+				with open(cwd() + r"/Modules/loginfo.txt","w+") as f:
+					f.write(f"logged,{Role},{User},{Class},{Sec},{Phone},{Email},{Enrollment_no},{UnitOneMarks},{UnitTwoMarks},{UnitThreeMarks},{PresentDays}")
+			toast(text="updated successfully")
 			self.ids.pro_label.text = ""
 		except Exception as e:
 			print(e)

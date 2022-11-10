@@ -2,7 +2,7 @@ from kivy.uix.screenmanager import Screen
 from Modules.db import collection
 from kivymd.toast import toast
 import multitasking
-multitasking.set_max_threads(2)
+multitasking.set_max_threads(10)
 
 class Rmv_Student(Screen):
 	@multitasking.task
@@ -32,7 +32,7 @@ class Rmv_Student(Screen):
 			self.ids.class_stu.text = ""
 			self.ids.email_stu.text = ""
 			self.ids.del_btn.opacity = 0
-			self.ids.search_btn.disabled = True
+			self.ids.search_btn.disabled = False
 		except Exception as e:
 			print(e)
 			

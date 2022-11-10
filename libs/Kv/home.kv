@@ -2,6 +2,7 @@
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import Window kivy.core.window.Window
 #:set main_color get_color_from_hex("#D63D6C")
+
 <Home>:
 	id:Home
 	name:"Home"
@@ -15,8 +16,7 @@
 			effect_cls:"ScrollEffect"
 			do_scroll_y:True
 			MDGridLayout:
-				size_hint:1,None
-				#height:"650dp" if Window.size[0] < 2000 else "815dp"
+				size_hint:1,1
 				cols:1
 				MDBoxLayout:
 					orientation:"vertical"
@@ -36,8 +36,8 @@
 							id:main_page_profile
 							source:""
 							size_hint:None,None
-							height:"250px" #if Window.size[0] < 2000 else "100px"
-							width:"250px" #if Window.size[0] < 2000 else "100px"
+							height:"250px" 
+							width:"250px" 
 							pos_hint:{'center_x':.8,'center_y':.38} if Window.size[0] > 2000 else {'center_x':.75,'center_y':.45}
 							canvas.before:
 								Color:
@@ -74,7 +74,7 @@
 						height:"60dp"
 						elevation:8
 						padding:10
-						md_bg_color:main_color#get_color_from_hex('#ff5a46')
+						md_bg_color:main_color
 						on_release:
 							app.root.set_current("RecordArea")
 							root.manager.transition.direction = 'left'

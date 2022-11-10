@@ -2,6 +2,8 @@ from kivy.uix.screenmanager import Screen
 from kivymd.toast import toast
 from Modules.db import collection
 import requests
+import os
+print(os.path)
 
 #this code is managing the whole login validation work.
 class LoginPage(Screen):

@@ -51,7 +51,7 @@ class Root(ScreenManager):
 			self.add_widget(screen_object)
 			
 	def _handle_keyboard(self, instance, key, *args):
-		if key == 27:
+		if key == 27 or key==1001:
 			self.goback()
 			return True
 

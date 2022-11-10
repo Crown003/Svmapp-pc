@@ -36,10 +36,21 @@ with open("Modules//numbers.txt","r+") as f:
 			UTThmarks.append(int(itemss.strip()))
 	else:
 		pass
-		
-	unit_one_marks = UTOmarks
-	unit_two_marks = UTTmarks
-	unit_three_marks = UTThmarks
+	
+###############
+	if not UTOmarks:	
+		unit_one_marks = [1,1,1,1,2]
+	else:
+		unit_one_marks =UTOmarks
+	if not UTTmarks:	
+		unit_two_marks = [1,1,1,1,2]
+	else:
+		unit_two_marks = UTTmarks
+	if not UTTmarks:	
+		unit_three_marks = [1,1,1,1,2]
+	else:
+		unit_three_marks = UTThmarks
+	
 	
 #############	#############     ####################
 	
@@ -50,8 +61,8 @@ class RecordArea(Screen):
 	user_Result_analysis = "A+"
 	Xvalues = [1,2,3,4,5]	
 	Barlabel = ["Math","Cs","Physic","Chemistry","English"]
-	ylabel = []			
-	Yvalues = unit_one_marks
+	ylabel = ["1/20","1/20","1/20","1/20","1/20"]			
+	Yvalues = [19,19,19,20,16] #unit_one_marks
 	def on_enter(self):
 		chart_bar = self.ids.chart
 		chart_bar.update()

@@ -2,41 +2,19 @@ import pymongo
 from .credentials import hashword,id,decoder
 import gridfs
 from kivy.utils import platform
+from os import getcwd as cwd
 try:
 	client = pymongo.MongoClient("mongodb://"+decoder(id,hashword)+":Crown@cluster0-shard-00-00.ltvt2.mongodb.net:27017,cluster0-shard-00-01.ltvt2.mongodb.net:27017,cluster0-shard-00-02.ltvt2.mongodb.net:27017/Main?ssl=true&replicaSet=atlas-he2q4w-shard-0&authSource=admin&retryWrites=true&w=majority")
 	db = client["Main"]
 	collection = db["UserData"]
 except:
 	print("Unable to connect the server.")
-			
+print(cwd)			
 
 
 months = ["","jan","feb","mar","apr","may","jun","jul",
 					"aug","sep","oct","nov","dec"]
 
-# list_screen = ['screens/splash.kv',
-# 'screens/home.kv',
-# 'screens/About.kv',
-# 'screens/lecture.kv'
-# 'screens/notes.kv'
-# ,'screens/syllabus.kv',
-# 'screens/profile.kv',
-# 'screens/login.kv',
-# 'screens/starea.kv',
-# 'screens/feesarea.kv',
-# 'screens/test.kv',
-# 'screens/records.kv',
-# 'screens/physic.kv',
-# 'screens/english.kv',
-# 'screens/maths.kv',
-# 'screens/chemistry.kv',
-# 'screens/cs.kv',
-# 'screens/ip.kv',
-# 'screens/assignment.kv',
-# 'screens/progress.kv',
-# 'screens/Teachers_interface.kv',
-# 'screens/Students_Details.kv',
-# ]
 
 #Lectures chapter list #
 p = ["Electric Charges and Fields",
@@ -54,6 +32,7 @@ p = ["Electric Charges and Fields",
 			"Nuclei",
 			"Semiconductor Electronics",
 			"Communication Systems",]
+			
 m = ["Relations & Functions",
 			"Inverse Trignometry and Functions",
 			"Matrices",
@@ -82,6 +61,7 @@ c = ["Solid State","Solution","Electrochemistry"
 			,"Biomolecules"
 			,"Polymers"
 			,"Chemistry in Everyday Life",]
+			
 cs= ["REVIEW OF PYTHON – I",
 			"REVIEW OF PYTHON – II",
 			"WORKING WITH FUNCTIONS",
@@ -120,9 +100,10 @@ def download_file(name_of_file):
 		print((chunksize/1024)/1024 ,"mb")
 		outputdata = fs.get(my_id).read()
 		if platform != "android":
-			download_location = r"C:\Users\global\Downloads/"+ name_of_file + ".pdf"
+			download_location = cwd()+"\\Notes\\" + name_of_file + ".pdf"
 		else:
 			download_location = "/storage/emulated/0/MyApp/Notes/"+ name_of_file + ".pdf"	
+		
 		output = open(download_location,"wb+")
 		output.write(outputdata)
 		output.close()
