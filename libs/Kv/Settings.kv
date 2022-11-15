@@ -1,13 +1,15 @@
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:set primaryColor get_color_from_hex("#FFF9C4")
 #:set textColor get_color_from_hex("#f2f2f2")
+#:set icon_color get_color_from_hex("#D63D6C")
+
 <Settings>:
 	name:"Settings"
 	id:profile
 	MDFloatLayout:
 		size_hint:1,1
 		minimum_height:1
-		md_bg_color:main_color
+		md_bg_color:icon_color
 		MDIconButton:
 			icon:"arrow-left"
 			theme_text_color: 'Custom'
@@ -105,7 +107,7 @@
 						MDFloatLayout:
 							MDLabel:
 								id:label
-								text:"Sarswati vidiya mandir"
+								text:"Saraswati vidya mandir"
 								font_name:"Ubuntu/Ubuntu-Medium"
 								size_hint_y:None
 								shorten: True

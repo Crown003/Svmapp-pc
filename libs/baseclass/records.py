@@ -1,16 +1,16 @@
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.menu import MDDropdownMenu
-
+from os import getcwd as cwd
 #default data for graph of records screen.
 unit_one_marks = [1,2,1,2,1]
 unit_two_marks = [1,2,1,2,1]
 unit_three_marks = [1,2,1,2,1]
 total_school_working_day = 88
 ##### This whole code convert the string values to integer..(values extracted from db)   ########
-with open("Modules//loginfo.txt","r+") as f:
+with open(r"{0}/Modules/loginfo.txt".format(cwd()),"r+") as f:
 	logged = f.read().split(",")
 	student_attendance = logged[len(logged)-1]
-with open("Modules//numbers.txt","r+") as f:
+with open(r"{0}/Modules/numbers.txt".format(cwd()),"r+") as f:
 	a = f.read().split("-")
 	b = a[0].replace("["," ")
 	c = b.replace("]"," ").replace("'","").split(",")
@@ -18,8 +18,6 @@ with open("Modules//numbers.txt","r+") as f:
 	e = d.replace("]"," ").replace("'","").split(",")
 	f = a[2].replace("["," ")
 	g = f.replace("]"," ").replace("'","").split(",")
-	print(c," ,",e,", ",g)
-	print(len(c),len(e),len(g))
 	UTOmarks =[]
 	UTTmarks =[]
 	UTThmarks =[]
@@ -39,7 +37,7 @@ with open("Modules//numbers.txt","r+") as f:
 	
 ###############
 	if not UTOmarks:	
-		unit_one_marks = [1,1,1,1,2]
+		unit_one_marks = [1,2,1,2,1]
 	else:
 		unit_one_marks =UTOmarks
 	if not UTTmarks:	
@@ -53,6 +51,14 @@ with open("Modules//numbers.txt","r+") as f:
 	
 	
 #############	#############     ####################
+
+def label_creator(data):
+	"""creating y labels for bargraph"""
+	label = []
+	for i in data:
+		b = str(i)+"/20"
+		label.append(b)
+	return label	
 	
 class RecordArea(Screen):
 	stud_attend = student_attendance
@@ -61,8 +67,10 @@ class RecordArea(Screen):
 	user_Result_analysis = "A+"
 	Xvalues = [1,2,3,4,5]	
 	Barlabel = ["Math","Cs","Physic","Chemistry","English"]
-	ylabel = ["1/20","1/20","1/20","1/20","1/20"]			
-	Yvalues = [19,19,19,20,16] #unit_one_marks
+	ylabel = label_creator(unit_one_marks)
+	print(label_creator(unit_one_marks))
+	Yvalues = unit_one_marks
+	print(unit_one_marks)
 	def on_enter(self):
 		chart_bar = self.ids.chart
 		chart_bar.update()
@@ -79,7 +87,7 @@ class RecordArea(Screen):
 			caller=self.a,
 			items=self.menu_items,
 			position="auto",
-			background_color=(.9,.9,.9,1),
+			background_color=(1,1,1,1),
 			opening_time=0,
 			width_mult=4,
 			)	
@@ -98,7 +106,6 @@ class RecordArea(Screen):
 		if int(list_text_item[1]) == 1:
 			chart_bar.y_labels = label_creator(unit_one_marks)
 			chart_bar.y_values = unit_one_marks
-			
 		elif int(list_text_item[1]) == 2:
 			chart_bar.y_labels = label_creator(unit_two_marks)
 			chart_bar.y_values = unit_two_marks

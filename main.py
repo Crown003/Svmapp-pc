@@ -16,7 +16,7 @@ import io
 import multitasking
 from kivy import platform
 from PIL import Image
-
+print(Window.size)
 #this thread for making process in background.
 multitasking.set_max_threads(10)
 
@@ -25,13 +25,6 @@ if  platform == "android":
 	from Modules.AndroidAPI import statusbar
 	from Modules.pdfview import PdfView
 
-User_obj = ""
-######
-User = ""
-Class = ""
-Phone = ""
-Email = ""
-######
 
 class Main(MDApp):
 		data_updated = False
@@ -50,7 +43,6 @@ class Main(MDApp):
 		def build(self):
 			self.theme_cls.primary_palette = "Pink"
 			self.root = Root()
-			print(Window.size[0])
 			self.root.load_screen("Home")
 			self.root.load_screen("LoginPage")
 			self.root.load_screen("Profile")
@@ -151,7 +143,7 @@ class Main(MDApp):
 				pil_img.save(profile_path)
 				return "exist"
 			except Exception as e:
-				print("from 155: (main.py):: ",e)
+				print(e)
 			
 		def check_file_exist(self,file):
 			"""this method check the file existance"""
@@ -175,7 +167,6 @@ class Main(MDApp):
 					webb.open_new(a)
 				toast(text="file already exist! Opening file.")
 			else:
-				print(name_of_file)
 				toast("Dowloading "+name_of_file.lower()+".pdf")
 				print("Downloading: ",name_of_file)
 				download_file(name_of_file)
@@ -188,10 +179,8 @@ class Main(MDApp):
 			with open(".//Modules//loginfo.txt","w") as f:
 				f.write("loggedout")
 			self.root.set_current("LoginPage")
-			if "Teacher" not in User:
-				self.close_dialog_logout()
-			else:
-				pass
+			self.close_dialog_logout()
+
 		
 	
 if __name__ == "__main__":

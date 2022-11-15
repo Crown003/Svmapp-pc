@@ -2,6 +2,8 @@
 #:import get_color_from_hex kivy.utils.get_color_from_hex
 #:import Window kivy.core.window.Window
 #:set main_color get_color_from_hex("#D63D6C")
+#:set icon_color get_color_from_hex("#F1F1F1")
+
 <MyBadgeLayout@AKBadgeLayout>:
 	pos_hint:{"center_x":.5,"center_y":.5}
 	badgeitem_padding:"5dp"
@@ -16,7 +18,7 @@
 		MDIconButton:
 			icon:"arrow-left"
 			theme_text_color: 'Custom'
-			text_color: 3,3,3,1
+			text_color: 1,1,1,1
 			pos_hint:{"center_x":.08,"center_y":.95}
 			ripple_scale:0
 			on_release:
@@ -24,11 +26,14 @@
 		MDLabel:
 			text:"My Records"
 			theme_text_color:"Custom"
-			text_color:3,3,3,1
+			text_color:1,1,1,1
 			font_name:"Ubuntu/Ubuntu-Bold"
 			font_size:"24dp"
 			pos_hint:{"center_x":.63,"center_y":.95}
 		ScrollView:
+			bar_color: [.6, .6, .6, 1]
+			scroll_type: ['bars', 'content']
+			bar_width: 10
 			effect_cls:"ScrollEffect"
 			pos_hint:{"top":.9}
 			do_scroll_y:True
@@ -45,11 +50,12 @@
 					md_bg_color:get_color_from_hex("ffffff")
 					MDRelativeLayout:
 						padding:"12dp"
+						spacing:"10dp"
 						AKCircularProgress:
 			                id: progress_relative
-			                pos_hint: {"center_x": .6, "center_y": .45} if Window.size[0] < 2000 else {"center_x": .8, "center_y": .45}
+			                pos_hint: {"center_x": .5, "center_y": .7} if Window.size[0] < 2000 else {"center_x": .8, "center_y": .45}
 			                size_hint: None, None
-			                size: dp(200), dp(200)
+			                size: ["200dp","200dp"] if Window.size[0] > 2000 else ["100dp","100dp"]
 			                md_bg_color:1,0,0,1
 			                percent_type: "relative"
 			                start_deg: 240
@@ -62,14 +68,14 @@
 							theme_text_color:"Custom"
 							text_color:get_color_from_hex("#333333")
 							font_size:"20dp" if Window.size[0] < 2000 else "20sp"
-							pos_hint:{"center_y":.50,"center_x":.71} if Window.size[0] < 2000 else {"center_y":.6,"center_x":.85}
+							pos_hint:{"center_y":.45,"center_x":.75} if Window.size[0] < 2000 else {"center_y":.6,"center_x":.85}
 						MDLabel:
 							text:f"Result Analysis : {root.user_Result_analysis}"
 							font_name:"Ubuntu/Ubuntu-Medium"
 							theme_text_color:"Custom"
 							text_color:get_color_from_hex("#333333")
 							font_size:"19sp" if Window.size[0] < 2000 else "20sp"
-							pos_hint:{"center_y":.35,"center_x":.7}if Window.size[0] < 2000 else {"center_y":.4,"center_x":.84}
+							pos_hint:{"center_y":.3,"center_x":.72}if Window.size[0] < 2000 else {"center_y":.4,"center_x":.84}
 						MDLabel:
 							text:"*****" if int(root.user_attendence_percentage) > 75 else "***" 
 							font_name:"Ubuntu/Ubuntu-Medium"
@@ -192,21 +198,22 @@
 						size_hint:.8,None
 						height:self.texture_size[1]
 						id:graph_title
-						text:"Term 1 marks"
+						text:"[b]Term 1 marks[/b]"
 						font_name:"Ubuntu/Ubuntu-Medium"
 						font_size:"20sp"
 						halign:"center"
+						markup:True
 						theme_text_color:"Custom"
-						text_color:1,1,1,1
+						text_color:.2,.2,.2,1
 					MDRelativeLayout:
-						cls:"box"
+						#cls:"box"
 						pos_hint:{"center_y":.4,"center_x":1.35}
 						anchor_x:"right"
 						MDIconButton:
 							id:drop_btn
 							icon:"arrow-down-drop-circle-outline"
 							theme_text_color: "Custom"
-							text_color:1,1,1,1
+							text_color:.2,.2,.2,1
 							on_release:
 								root.menu_box()
 								root.menu.open()
@@ -222,10 +229,10 @@
 						y_values:root.Yvalues
 						x_labels:root.Barlabel
 						lines:True
-						labels_color:0,0,0,1
+						labels_color:.2,.2,.2,1
 						label_size: dp(7)
 						anim:True
 						bars_color: main_color
-						bg_color:get_color_from_hex("#f1f1f1")
-						lines_color:0,0,0,.4 #base of bars					
+						bg_color:icon_color#get_color_from_hex("#f1f1f1")
+					#	lines_color:0,0,0,.4 #base of bars					
 				
