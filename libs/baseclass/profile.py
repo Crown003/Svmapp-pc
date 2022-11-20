@@ -9,6 +9,7 @@ from PIL import Image
 from kivymd.uix.snackbar import Snackbar
 from kivymd.toast import toast
 from os import getcwd as cwd
+import json
 
 if platform != "android":
 	from plyer import filechooser
@@ -39,9 +40,9 @@ class Profile(Screen):
 	def exit_manager(self, *args):
 		self.manager_open = False
 		if args[0] != 1:
-			with open(cwd() + r"/Modules/loginfo.txt","r") as f:
-				logged = f.read().split(",")
-				self.upload_image_details = [logged[7],args[0]]
+			with open(cwd() + r"/Modules/loginfo.json","r") as f:
+				logged = json.loads(f.read())
+				self.upload_image_details = [logged["userEnrollNum"],args[0]]
 				self.upload_profile_photo(self.upload_image_details[0],self.upload_image_details[1])		
 		else:
 			toast("noting selected.")
@@ -99,16 +100,17 @@ class Profile(Screen):
 		self.ids.contact_field.text = Phone.text	
 		self.ids.email_field.text = Email.text
 		if platform != "android":
-			with open(cwd() + r"\Modules\loginfo.txt","r") as f:
-				data = f.read().split(",")
+			with open(cwd() + r"\Modules\loginfo.json","r") as f:
+				data = json.loads(f.read())
 		else:
-			with open(cwd() + r"/Modules/loginfo.txt","r") as f:
-				data = f.read().split(",")
-		role = data[1]
-		sec = data[4]
-		phone = data[5]
-		enrollment = data[7]
-		query = {"Enrollment":data[7]}
+			with open(cwd() + r"/Modules/loginfo.json","r") as f:
+				data = json.loads(f.read())
+		role = data["role"]
+		sec = data["userSection"]
+		phone = data["userPhone"]
+		enrollment = data["userEnrollNum"]
+		presentdays = int(data["userAttendence"])
+		query = {"Enrollment":data["userEnrollNum"]}
 		update_values = {"$set" : {"Username":Name.text,"Class":Class.text,"Phone":Phone.text,"Email":Email.text}}
 		try:
 			collection.update_one(query,update_values)
@@ -120,17 +122,18 @@ class Profile(Screen):
 			Role = role
 			Phone = phone
 			Enrollment_no = enrollment
-			UnitOneMarks = []
-			UnitTwoMarks = []
-			UnitThreeMarks = []
-			PresentDays = 60
+			UnitOneMarks = data["userMarks"]["UnitOneMarks"]
+			UnitTwoMarks = data["userMarks"]["UnitTwoMarks"]
+			UnitThreeMarks = data["userMarks"]["UnitThreeMarks"]
+			PresentDays = presentdays
 			if platform != "android":
 				with open(cwd() + r"\Modules\loginfo.txt","w+") as f:
-					f.write(f"logged,{Role},{User},{Class},{Sec},{Phone},{Email},{Enrollment_no},{UnitOneMarks},{UnitTwoMarks},{UnitThreeMarks},{PresentDays}")
+					f.write('{"status":"%s","role": "%s","userName": "%s","userClass":"%s","userSection":"%s","userPhone":"%s","userEmail":"%s","userEnrollNum":"%s","userAttendence":"%s","userMarks":{"UnitOneMarks":[%s],"UnitTwoMarks":[%s],"UnitThreeMarks":[%s]}}'''%("logged","student",User,Class,Sec,Phone,Email,Enrollment_no,PresentDays,UnitOneMarks,UnitTwoMarks,UnitThreeMarks))	
 			
 			else:
 				with open(cwd() + r"/Modules/loginfo.txt","w+") as f:
-					f.write(f"logged,{Role},{User},{Class},{Sec},{Phone},{Email},{Enrollment_no},{UnitOneMarks},{UnitTwoMarks},{UnitThreeMarks},{PresentDays}")
+					f.write('{"status":"%s","role": "%s","userName": "%s","userClass":"%s","userSection":"%s","userPhone":"%s","userEmail":"%s","userEnrollNum":"%s","userAttendence":"%s","userMarks":{"UnitOneMarks":[%s],"UnitTwoMarks":[%s],"UnitThreeMarks":[%s]}}'''%("logged","student",User,Class,Sec,Phone,Email,Enrollment_no,PresentDays,UnitOneMarks,UnitTwoMarks,UnitThreeMarks))	
+			
 			toast(text="updated successfully")
 			self.ids.pro_label.text = ""
 		except Exception as e:

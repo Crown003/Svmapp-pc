@@ -19,7 +19,7 @@ class Maths_notes(Screen):
 				if self.check_file_exist(m[i]) == True:
 					icon="check-underline"
 					color = 0,1,0,1
-				self.ids.Mathlist.add_widget(ListItemWithIcon(text=p[i],icon=icon,theme_text_color="Custom",text_color=color))
+				self.ids.Mathlist.add_widget(ListItemWithIcon(text=m[i],icon=icon,theme_text_color="Custom",text_color=color))
 
 	def on_enter(self):
 		self.add_list_items()

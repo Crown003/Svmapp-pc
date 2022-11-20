@@ -10,6 +10,7 @@ class Root(ScreenManager):
 	def __init__(self, **kwargs):
 		super().__init__(**kwargs)
 		Window.bind(on_keyboard=self._handle_keyboard)		
+		
 		# getting screens data from screens.json
 		with open("Modules//screens.json") as f:
 			self.screens_data = json.load(f)

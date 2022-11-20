@@ -9,9 +9,11 @@ import io
 
 class Student_Details(Screen):
 	def all_cls_students_list(self):
-		with open("Modules//loginfo.txt","r+") as f:
-			data_new =  f.read().split(",")
-			a = collection.find({"Role":"Student","Class":data_new[3][:2]})
+		with open("Modules//loginfo.json","r+") as f:
+			import json
+			data_new =  json.loads(f.read())
+			print(data_new["userClass"][:2],data_new["userClass"][2:])
+			a = collection.find({"Role":"Student","Class":data_new["userClass"][:2],"Sec":data_new["userClass"][2:]})
 		self.k = []
 		for items in a:
 			n = list([items["Enrollment"],items["Username"],items["Class"],items["Sec"]])
@@ -19,11 +21,12 @@ class Student_Details(Screen):
 	def show_data(self):
 		self.ids.grid.add_widget(OneLineListItem(text="Enmt no.   Name   Class   Sec",font_style="H5",theme_text_color="Custom",text_color=[1,0,0,.85]))
 		for i in range(len(self.k)):
-			z = len(self.k[i][1])//3 if len(self.k[i][1]) > 10 else len(self.k[i][1]) #slicing the name
-			self.ids.grid.add_widget(OneLineList(text=f"{self.k[i][0]}   {self.k[i][1][:z].replace(' ','')}   {self.k[i][2]}   {self.k[i][3]}",theme_text_color="Custom",text_color=[0,0,0,1]))
+			z = self.k[i][1].split()
+			self.ids.grid.add_widget(OneLineList(text=f"{self.k[i][0]}   {z[0].upper()}   {self.k[i][2]}   {self.k[i][3]}",theme_text_color="Custom",text_color=[0,0,0,1]))
 	def on_enter(self):
 		self.all_cls_students_list()
 		self.show_data()
+		
 class OneLineList(OneLineListItem):
 	def students_details_sheet(self,data):
 		a = data.split()

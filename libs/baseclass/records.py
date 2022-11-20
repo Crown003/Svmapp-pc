@@ -1,40 +1,20 @@
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.menu import MDDropdownMenu
 from os import getcwd as cwd
+import json
+
 #default data for graph of records screen.
 unit_one_marks = [1,2,1,2,1]
 unit_two_marks = [1,2,1,2,1]
 unit_three_marks = [1,2,1,2,1]
 total_school_working_day = 88
 ##### This whole code convert the string values to integer..(values extracted from db)   ########
-with open(r"{0}/Modules/loginfo.txt".format(cwd()),"r+") as f:
-	logged = f.read().split(",")
-	student_attendance = logged[len(logged)-1]
-with open(r"{0}/Modules/numbers.txt".format(cwd()),"r+") as f:
-	a = f.read().split("-")
-	b = a[0].replace("["," ")
-	c = b.replace("]"," ").replace("'","").split(",")
-	d = a[1].replace("["," ")
-	e = d.replace("]"," ").replace("'","").split(",")
-	f = a[2].replace("["," ")
-	g = f.replace("]"," ").replace("'","").split(",")
-	UTOmarks =[]
-	UTTmarks =[]
-	UTThmarks =[]
-	if len(c) != 1:
-		for item in c:
-			UTOmarks.append(int(item.strip()))
-	else:
-		pass
-	if len(e) != 1:
-		for items in e:
-			UTTmarks.append(int(items.strip()))
-	if len(g) != 1:
-		for itemss in g:
-			UTThmarks.append(int(itemss.strip()))
-	else:
-		pass
-	
+with open(r"{0}/Modules/loginfo.json".format(cwd()),"r+") as f:
+	logged = json.loads(f.read())
+	student_attendance = logged["userAttendence"]
+	UTOmarks =logged["userMarks"]["UnitOneMarks"]
+	UTTmarks =logged["userMarks"]["UnitTwoMarks"]
+	UTThmarks =logged["userMarks"]["UnitThreeMarks"]
 ###############
 	if not UTOmarks:	
 		unit_one_marks = [1,2,1,2,1]
@@ -47,9 +27,7 @@ with open(r"{0}/Modules/numbers.txt".format(cwd()),"r+") as f:
 	if not UTTmarks:	
 		unit_three_marks = [1,1,1,1,2]
 	else:
-		unit_three_marks = UTThmarks
-	
-	
+		unit_three_marks = UTThmarks	
 #############	#############     ####################
 
 def label_creator(data):

@@ -1,41 +1,18 @@
 from kivy.uix.screenmanager import Screen
 import datetime
 from Modules.db import months
-#m,cs,p,c,e
+import json
+#maths,cs,physic,chemistry,english
 unit_one_marks = [1,2,1,2,1]
 unit_two_marks = [1,2,1,2,1]
 unit_three_marks = [1,2,1,2,1]
 total_school_working_day = 88
-with open("Modules//loginfo.txt","r+") as f:
-	logged = f.read().split(",")
-	student_attendance = logged[len(logged)-1]
-with open("Modules//numbers.txt","r+") as f:
-	a = f.read().split("-")
-	b = a[0].replace("["," ")
-	c = b.replace("]"," ").replace("'","").split(",")
-	d = a[1].replace("["," ")
-	e = d.replace("]"," ").replace("'","").split(",")
-	f = a[2].replace("["," ")
-	g = f.replace("]"," ").replace("'","").split(",")
-	UTOmarks =[]
-	UTTmarks =[]
-	UTThmarks =[]
-	if len(c) != 1:
-		for item in c:
-			UTOmarks.append(int(item.strip()))
-	else:
-		pass
-	if len(e) != 1:
-		for items in e:
-			UTTmarks.append(int(items.strip()))
-	if len(g) != 1:
-		for itemss in g:
-			UTThmarks.append(int(itemss.strip()))
-	else:
-		pass
-	unit_one_marks = UTOmarks
-	unit_two_marks = UTTmarks
-	unit_three_marks = UTThmarks
+with open("Modules//loginfo.json","r+") as f:
+	logged = json.loads(f.read())
+unit_one_marks = logged["userMarks"]["UnitOneMarks"]
+unit_two_marks =  logged["userMarks"]["UnitTwoMarks"]
+unit_three_marks =  logged["userMarks"]["UnitThreeMarks"]
+
 class Progress_Screen(Screen):
 	def percentage_calc_ut(marks):
 		mark = sum(marks)

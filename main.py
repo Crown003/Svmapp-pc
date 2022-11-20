@@ -16,7 +16,8 @@ import io
 import multitasking
 from kivy import platform
 from PIL import Image
-print(Window.size)
+
+
 #this thread for making process in background.
 multitasking.set_max_threads(10)
 
@@ -39,7 +40,6 @@ class Main(MDApp):
 		UserClass = f""
 		UserEmail = f""
 		UserPhone = f""
-		
 		def build(self):
 			self.theme_cls.primary_palette = "Pink"
 			self.root = Root()
@@ -50,27 +50,33 @@ class Main(MDApp):
 		def on_start(self):
 			try:
 				#opening file containing userlogin informations.
-				with open(".//Modules//loginfo.txt","r+") as f:
-					logged = f.read().split(",")
+				with open(".//Modules//loginfo.json","r+") as f:
+					import json
+					logged = json.loads(f.read())
 					#checking the validation of user.
-					if logged[0] == "logged" and logged[1].upper() == "STUDENT":
-						self.root.current = "Home"
-						self.data_update()
-					elif logged[0] == "logged" and logged[1].upper() == "TEACHER":
-						self.root.set_current("Teachers_interface")
-					else:
+					if logged["status"] == "loggedout" :
 						self.root.set_current("LoginPage")
+						
+					elif logged["status"] == "logged":
+						if logged["role"].upper() == "STUDENT":
+							self.root.current = "Home"
+							self.data_update()
+							self.data_updated = True
+						elif logged["role"].upper() == "TEACHER":
+							self.root.set_current("Teachers_interface")
+										
 			except FileNotFoundError:
-				with open(".//Modules//loginfo.txt","x") as f:
+				with open(".//Modules//loginfo.json","x") as f:
 					pass
 				self.root.set_current("LoginPage")
 		
 		def data_update(self):
 			"""This method update the user data according to their  profile."""
 			try:	
-				with open(".//Modules//loginfo.txt","r+") as f:
-					check = f.read().split(",")
-					a = self.get_Profile_image(check[7],".//profile.png")
+				with open(".//Modules//loginfo.json","r+") as f:
+					import json
+					check = json.loads(f.read())
+					a = self.get_Profile_image(check["userEnrollNum"],".//profile.png")
 					User_profile = r"assets/noprofile.png"
 					if a == "exist":
 						User_profile =".//profile.png"
@@ -80,14 +86,13 @@ class Main(MDApp):
 			except Exception as e:
 				print("error from main data_update: ",e)
 			try:
-				Status,Role,name,class_,sec,phone,email,*args= check
-				self.root.get_screen("Home").ids.Nlabel.text = name
-				self.root.get_screen("Home").ids.Clabel.text = class_ + sec
+				self.root.get_screen("Home").ids.Nlabel.text = check["userName"].split()[0]
+				self.root.get_screen("Home").ids.Clabel.text = check["userClass"] + check["userSection"]
 				#below changing the profile details in profile screen.
-				self.root.get_screen("Profile").ids.name_field.text = name
-				self.root.get_screen("Profile").ids.class_field.text = class_
-				self.root.get_screen("Profile").ids.contact_field.text = phone
-				self.root.get_screen("Profile").ids.email_field.text = email		
+				self.root.get_screen("Profile").ids.name_field.text = check["userName"]
+				self.root.get_screen("Profile").ids.class_field.text = check["userClass"]
+				self.root.get_screen("Profile").ids.contact_field.text = check["userPhone"]
+				self.root.get_screen("Profile").ids.email_field.text = check["userEmail"]		
 				self.data_updated = True
 			except Exception as e:
 				print("from main",e)
@@ -175,13 +180,11 @@ class Main(MDApp):
 		def logout(self,*arg):
 			"""method to logout the user"""
 			print(arg[0])
-			self.data_updated = "0"
-			with open(".//Modules//loginfo.txt","w") as f:
-				f.write("loggedout")
+			self.data_updated = False
+			with open(".//Modules//loginfo.json","w") as f:
+				f.write('{"status": "loggedout"}')
 			self.root.set_current("LoginPage")
 			self.close_dialog_logout()
-
-		
 	
 if __name__ == "__main__":
 	Main().run()

@@ -65,8 +65,8 @@
 					size_hint:1,None
 					pos_hint:{"top":.9}
 					height:self.minimum_height
-					spacing:"120px"
-					padding:10
+					spacing:"20dp"
+					padding:"10dp"
 					MDLabel:
 						id:loading_label
 						text:""					
@@ -98,26 +98,30 @@
 						text_color:0,0,0,1
 						font_name:"Ubuntu/Ubuntu-Medium"
 						theme_text_color:"Custom"
-					AnchorLayout:
-						anchor_x:"center"
-						MDFillRoundFlatIconButton:
-							id:del_btn
-							icon:"delete"
-							text:"Delete this student."
-							theme_text_color:"Custom"
-							text_color:1,0,0,1
-							icon_color:1,0,0,1
-							md_bg_color:.9,.9,.9,1
-							opacity:0
-							disabled:True if del_btn.opacity == 0 else False
-							on_release:
-								root.del_student(StuEnrollmentNumber.text)	
+				MDRelativeLayout:
+					size_hint:1,None
+					height:"200dp"
+					spacing:"30dp"
+					padding:"15dp"
+					MDFillRoundFlatIconButton:
+						id:del_btn
+						icon:"delete"
+						pos_hint:{"center_y":.5,"center_x":.5}
+						text:"Delete this student."
+						theme_text_color:"Custom"
+						text_color:1,0,0,1
+						icon_color:1,0,0,1
+						md_bg_color:.9,.9,.9,1
+						opacity:0
+						disabled:True if del_btn.opacity == 0 else False
+						on_release:
+							root.del_student(StuEnrollmentNumber.text)	
 					MDLabel:
-						pos_hint:{"center_y":1,"center_x":.5}
+						pos_hint:{"center_y":.3,"center_x":.5}
 						halign:"center"
 						markup:True
 						text:"[color=#ff0000][b]NOTE: [/b] After deleting,Student's data will be lost permanently.[/color]"
-						
+							
 						
 						
 						

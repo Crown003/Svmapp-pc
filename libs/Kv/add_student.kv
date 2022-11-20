@@ -1,9 +1,10 @@
 #:import get_color_from_hex kivy.utils.get_color_from_hex
+#:set main_color get_color_from_hex("#add8e6")
 <Add_Student>:
 	MDFloatLayout:
 		size_hint:1,1
 		minimum_height:1
-		md_bg_color:get_color_from_hex('#add8e6')
+		md_bg_color:main_color
 		MDIconButton:
 			icon:"arrow-left"
 			theme_text_color: 'Custom'
@@ -87,11 +88,31 @@
 					max_text_length:10
 					line_color_normal:0,0,0,1
 					line_color_focus:get_color_from_hex("000000")
-				AnchorLayout:
-					anchor_x:"center"
+				MDTextField:
+					id:StuEmail
+					text:""
+					hint_text:"Email" 				
+					text_color:0,0,0,1
+					font_name:"Ubuntu/Ubuntu-Medium"
+					hint_text_mode:"on_focus"
+					color_mode:"custom"
+					line_color_normal:0,0,0,1
+					line_color_focus:get_color_from_hex("000000")
+				MDFillRoundFlatIconButton:
+					text:"Your Date of Birth"
+					icon:"calendar-cursor"
+					theme_text_color:"Custom"
+					text_color:.9,.9,.9,1
+					md_bg_color:get_color_from_hex("#2A1C33")
+					on_release:
+						root.show_date_picker()
+				MDRelativeLayout:
+					size_hint:1,None
+					height:"100dp"
 					MDFillRoundFlatButton:
 						id:addStuButton
-						disabled : True if StuEnrollmentNumber.text == "" or StuName.text == "" or StuClass.text == "" or StuSection.text == "" or StuPhone.text == "" else False
+						pos_hint:{"center_x":.5,"center_y":.5}
+						disabled : True if StuEnrollmentNumber.text == "" or StuName.text == "" or StuClass.text == "" or StuSection.text == "" or StuPhone.text == "" or StuEmail.text == "" else False
 						text:"[b]Add Student[/b]" if addStuButton.disabled != True else "[b]Please fill the from.[/b]"
 						theme_text_color: "Custom"
 						text_color: [0,0, 1, 1]
@@ -102,5 +123,5 @@
 						text_color_disabled:[1,1,1,1]
 						markup:True	
 						on_release:
-							root.add_student_from_teacher(StuEnrollmentNumber.text,StuName.text,StuClass.text,StuSection.text,StuPhone.text)
+							root.add_student_from_teacher(StuEnrollmentNumber.text,StuName.text,StuClass.text,StuSection.text,StuPhone.text,StuEmail.text)
 					

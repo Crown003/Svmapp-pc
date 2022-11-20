@@ -118,5 +118,10 @@
         "import": "from libs.baseclass.rmv_student import Rmv_Student",
         "object": "Rmv_Student()",
         "kv": "libs/kv/rmv_student.kv"
+    },
+    "Pay_Fees":{
+    	"import": "from libs.baseclass.payfees import Pay_Fees",
+        "object": "Pay_Fees()",
+        "kv": "libs/kv/payfees.kv"
     }
 }

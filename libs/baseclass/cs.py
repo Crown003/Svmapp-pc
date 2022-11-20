@@ -24,7 +24,7 @@ class Cs_notes(Screen):
 				if self.check_file_exist(cs[i]) == True:
 					icon="check-underline"
 					color = 0,1,0,1
-				self.ids.Mathlist.add_widget(ListItemWithIcon(text=p[i],icon=icon,theme_text_color="Custom",text_color=color))
+				self.ids.Mathlist.add_widget(ListItemWithIcon(text=cs[i],icon=icon,theme_text_color="Custom",text_color=color))
 
 	def on_enter(self):
 		"""on enter. use to generate the notes list on entering the screen"""

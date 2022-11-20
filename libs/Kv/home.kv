@@ -7,7 +7,7 @@
 	id:Home
 	name:"Home"
 	on_enter:
-		app.data_update() if app.data_updated == "0" else ""
+		app.data_update() if app.data_updated == False else ""
 	MDFloatLayout:
 		orientation:"vertical"
 		md_bg_color:get_color_from_hex("#A6DAFF60")

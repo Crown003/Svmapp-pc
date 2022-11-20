@@ -1,1 +1,0 @@
-logged,Student,nikhil,12,A,9999911111,nikhilmaurya@gmail.com,2,[],[],[],60

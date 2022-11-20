@@ -3,14 +3,14 @@ from kivymd.toast import toast
 from Modules.db import collection
 import requests
 import os
-print(os.path)
+import json
 
 #this code is managing the whole login validation work.
 class LoginPage(Screen):
 	def loginUser(self,name,password):
 		if name.text == "" or password.text == "":
 			toast(text="Please enter some valid credentials",gravity=80)
-		else:	
+		else:
 			try:
 				requests.get(url="https://google.com",timeout=5)
 				self.user_obj = collection.find_one({"$or": [{"Enrollment":name.text,"Password":password.text},{"Username":name.text,"Password":password.text}]})
@@ -29,23 +29,23 @@ class LoginPage(Screen):
 						UTT = self.user_obj["UnitTwoMarks"]
 						UTTh = self.user_obj["UnitThreeMarks"]
 						self.manager.transition.direction = "left"
-						self.manager.current = "Home"
-						with open("Modules//loginfo.txt","w+") as f:
-							f.write(f"logged,{Role},{User},{Class},{Sec},{Phone},{Email},{Enrollment_no},{PresentDays}")	
-						with open("Modules//numbers.txt","w+") as k:
-							k.write(f"{UTO}-{UTT}-{UTTh}")				
+						with open("Modules//loginfo.json","w") as f:
+							f.write('{"status":"%s","role": "%s","userName": "%s","userClass":"%s","userSection":"%s","userPhone":"%s","userEmail":"%s","userEnrollNum":"%s","userAttendence":"%s","userMarks":{"UnitOneMarks":%s,"UnitTwoMarks":%s,"UnitThreeMarks":%s}}'''%("logged",Role,User,Class,Sec,Phone,Email,Enrollment_no,PresentDays,UTO,UTT,UTTh))
+						
+						self.manager.current = "Home"			
 					elif self.user_obj["Username"] != "" and self.user_obj["Role"].upper()== "TEACHER":
 						User = self.user_obj["Username"]
 						Class = self.user_obj["Class"]
 						Role = self.user_obj["Role"]
 						self.manager.current = "Teachers_interface"
-						with open("Modules//loginfo.txt","w+") as f:
-							f.write(f"logged,{Role},{User},{Class}")
+						with open("Modules//loginfo.json","w+") as f:
+							f.write('{"status":"%s","role": "%s","username": "%s","userClass":"%s"}'%("logged",Role,User,Class))
 					else:
 						pass
 				else:
 					toast("No user found with given credentials.")
 			except Exception as e:
+				print(e)
 				if e == "HTTPSConnectionPool(host='google.com', port=443): Read timed out. (read timeout=5)":
 					toast(text="Please check your internet connection !!",gravity=80)
 				else:
