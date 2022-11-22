@@ -30,9 +30,9 @@ class Profile(Screen):
 	def select_path(self, path):
 		if platform != "android":
 			if path:
-				with open(cwd() + r"\Modules\loginfo.txt","r") as f:
-					logged = f.read().split(",")
-					self.upload_image_details = [logged[7],path[0]]
+				with open(cwd() + r"\Modules\loginfo.json","r") as f:
+					logged = json.loads(f.read())
+					self.upload_image_details = [logged["userEnrollNum"],path[0]]
 					self.upload_profile_photo(self.upload_image_details[0],self.upload_image_details[1])	
 		else:	
 			self.exit_manager(path)
@@ -46,7 +46,6 @@ class Profile(Screen):
 				self.upload_profile_photo(self.upload_image_details[0],self.upload_image_details[1])		
 		else:
 			toast("noting selected.")
-		#self.upload_profile_photo(logged[7],args[0])
 		self.file_manager.close()
 	def events(self, instance, keyboard, keycode, text, modifiers):
 		if keyboard in (1001, 27):
