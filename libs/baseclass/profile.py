@@ -8,7 +8,7 @@ from kivy import platform
 from PIL import Image
 from kivymd.uix.snackbar import Snackbar
 from kivymd.toast import toast
-from os import getcwd as cwd
+import os 
 import json
 
 if platform != "android":
@@ -30,7 +30,8 @@ class Profile(Screen):
 	def select_path(self, path):
 		if platform != "android":
 			if path:
-				with open(cwd() + r"\Modules\loginfo.json","r") as f:
+				os.chdir("/")
+				with open(os.getcwd() + r"\Modules\loginfo.json","r") as f:
 					logged = json.loads(f.read())
 					self.upload_image_details = [logged["userEnrollNum"],path[0]]
 					self.upload_profile_photo(self.upload_image_details[0],self.upload_image_details[1])	
@@ -40,7 +41,7 @@ class Profile(Screen):
 	def exit_manager(self, *args):
 		self.manager_open = False
 		if args[0] != 1:
-			with open(cwd() + r"/Modules/loginfo.json","r") as f:
+			with open(os.getcwd() + r"/Modules/loginfo.json","r") as f:
 				logged = json.loads(f.read())
 				self.upload_image_details = [logged["userEnrollNum"],args[0]]
 				self.upload_profile_photo(self.upload_image_details[0],self.upload_image_details[1])		
@@ -99,10 +100,10 @@ class Profile(Screen):
 		self.ids.contact_field.text = Phone.text	
 		self.ids.email_field.text = Email.text
 		if platform != "android":
-			with open(cwd() + r"\Modules\loginfo.json","r") as f:
+			with open(os.getcwd() + r"\Modules\loginfo.json","r") as f:
 				data = json.loads(f.read())
 		else:
-			with open(cwd() + r"/Modules/loginfo.json","r") as f:
+			with open(os.getcwd() + r"/Modules/loginfo.json","r") as f:
 				data = json.loads(f.read())
 		role = data["role"]
 		sec = data["userSection"]
@@ -126,11 +127,11 @@ class Profile(Screen):
 			UnitThreeMarks = data["userMarks"]["UnitThreeMarks"]
 			PresentDays = presentdays
 			if platform != "android":
-				with open(cwd() + r"\Modules\loginfo.txt","w+") as f:
+				with open(os.getcwd() + r"\Modules\loginfo.txt","w+") as f:
 					f.write('{"status":"%s","role": "%s","userName": "%s","userClass":"%s","userSection":"%s","userPhone":"%s","userEmail":"%s","userEnrollNum":"%s","userAttendence":"%s","userMarks":{"UnitOneMarks":[%s],"UnitTwoMarks":[%s],"UnitThreeMarks":[%s]}}'''%("logged","student",User,Class,Sec,Phone,Email,Enrollment_no,PresentDays,UnitOneMarks,UnitTwoMarks,UnitThreeMarks))	
 			
 			else:
-				with open(cwd() + r"/Modules/loginfo.txt","w+") as f:
+				with open(os.getcwd() + r"/Modules/loginfo.txt","w+") as f:
 					f.write('{"status":"%s","role": "%s","userName": "%s","userClass":"%s","userSection":"%s","userPhone":"%s","userEmail":"%s","userEnrollNum":"%s","userAttendence":"%s","userMarks":{"UnitOneMarks":[%s],"UnitTwoMarks":[%s],"UnitThreeMarks":[%s]}}'''%("logged","student",User,Class,Sec,Phone,Email,Enrollment_no,PresentDays,UnitOneMarks,UnitTwoMarks,UnitThreeMarks))	
 			
 			toast(text="updated successfully")
