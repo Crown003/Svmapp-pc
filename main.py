@@ -16,7 +16,7 @@ import io
 import multitasking
 from kivy import platform
 from PIL import Image
-
+import json
 
 #this thread for making process in background.
 multitasking.set_max_threads(10)
@@ -25,6 +25,30 @@ multitasking.set_max_threads(10)
 if  platform == "android":
 	from Modules.AndroidAPI import statusbar
 	from Modules.pdfview import PdfView
+
+class helper:
+	def get_userdata(self):
+		try:
+			#opening file containing userlogin informations.
+			with open(".//Modules//loginfo.json","r+") as f:
+				userdata = json.loads(f.read())
+				return userdata
+		except Exception as e:
+			print(e)
+			toast("unable to fetch user's data.")
+			return 404
+		
+	def push_userdata(self,*args):
+		try:
+			print(args[0])
+			#opening file containing userlogin informations.
+			with open(".//Modules//loginfo.json","w+") as f:
+				userdata = json.dumps(f.write(args[0]))
+				return 201
+		except Exception as e:
+			print(e)
+			toast("unable to update user's data.")
+			return 404
 
 
 class Main(MDApp):
@@ -40,6 +64,7 @@ class Main(MDApp):
 		UserClass = f""
 		UserEmail = f""
 		UserPhone = f""
+		Cursor = helper()
 		def build(self):
 			self.theme_cls.primary_palette = "Pink"
 			self.root = Root()
@@ -47,42 +72,39 @@ class Main(MDApp):
 			self.root.load_screen("LoginPage")
 			self.root.load_screen("Profile")
 			self.root.load_screen("Teachers_interface")
+		
 		def on_start(self):
-			try:
-				#opening file containing userlogin informations.
-				with open(".//Modules//loginfo.json","r+") as f:
-					import json
-					logged = json.loads(f.read())
-					#checking the validation of user.
-					if logged["status"] == "loggedout" :
-						self.root.set_current("LoginPage")
+			try:	
+				logged = self.Cursor.get_userdata()
+				#checking the validation of user.
+				if logged["status"] == "loggedout" :
+					self.root.set_current("LoginPage")
 						
-					elif logged["status"] == "logged":
-						if logged["role"].upper() == "STUDENT":
-							self.root.current = "Home"
-							self.data_update()
-							self.data_updated = True
-						elif logged["role"].upper() == "TEACHER":
-							self.root.set_current("Teachers_interface")
+				elif logged["status"] == "logged":
+					if logged["role"].upper() == "STUDENT":
+						self.root.current = "Home"
+						self.data_update()
+						self.data_updated = True
+					elif logged["role"].upper() == "TEACHER":
+						self.root.set_current("Teachers_interface")
 										
-			except FileNotFoundError:
-				with open(".//Modules//loginfo.json","x") as f:
-					pass
+			except Exception as e:
+				if e == FileNotFoundError:
+					with open(".//Modules//loginfo.json","x") as f:
+						pass
 				self.root.set_current("LoginPage")
 		
 		def data_update(self):
 			"""This method update the user data according to their  profile."""
+			check = self.Cursor.get_userdata()
 			try:	
-				with open(".//Modules//loginfo.json","r+") as f:
-					import json
-					check = json.loads(f.read())
-					a = self.get_Profile_image(check["userEnrollNum"],".//profile.png")
-					User_profile = r"assets/noprofile.png"
-					if a == "exist":
-						User_profile =".//profile.png"
-					self.root.get_screen("Profile").ids.profile_image.source = User_profile
-					self.root.get_screen("Home").ids.main_page_profile.source = User_profile
-					self.reload_home_image()
+				a = self.get_Profile_image(check["userEnrollNum"],".//profile.png")
+				User_profile = r"assets/noprofile.png"
+				if a == "exist":
+					User_profile =".//profile.png"
+				self.root.get_screen("Profile").ids.profile_image.source = User_profile
+				self.root.get_screen("Home").ids.main_page_profile.source = User_profile
+				self.reload_home_image()
 			except Exception as e:
 				print("error from main data_update: ",e)
 			try:
@@ -182,7 +204,7 @@ class Main(MDApp):
 			print(arg[0])
 			self.data_updated = False
 			with open(".//Modules//loginfo.json","w") as f:
-				f.write('{"status": "loggedout"}')
+				json.dump(f.write('{"status": "loggedout"}'))
 			self.root.set_current("LoginPage")
 			self.close_dialog_logout()
 	

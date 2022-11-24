@@ -8,13 +8,13 @@ from kivy import platform
 from PIL import Image
 from kivymd.uix.snackbar import Snackbar
 from kivymd.toast import toast
-import os 
-import json
+from main import helper
 
 if platform != "android":
 	from plyer import filechooser
 
-class Profile(Screen):	
+class Profile(Screen):
+	Cursor = helper()	
 	def __init__(self, **kwargs):
 		super().__init__(**kwargs)
 		Window.bind(on_keyboard=self.events)
@@ -30,21 +30,18 @@ class Profile(Screen):
 	def select_path(self, path):
 		if platform != "android":
 			if path:
-				os.chdir("/")
-				with open(os.getcwd() + r"\Modules\loginfo.json","r") as f:
-					logged = json.loads(f.read())
-					self.upload_image_details = [logged["userEnrollNum"],path[0]]
-					self.upload_profile_photo(self.upload_image_details[0],self.upload_image_details[1])	
+				logged = self.Cursor.get_userdata()
+				self.upload_image_details = [logged["userEnrollNum"],path[0]]
+				self.upload_profile_photo(self.upload_image_details[0],self.upload_image_details[1])	
 		else:	
 			self.exit_manager(path)
 	
 	def exit_manager(self, *args):
 		self.manager_open = False
-		if args[0] != 1:
-			with open(os.getcwd() + r"/Modules/loginfo.json","r") as f:
-				logged = json.loads(f.read())
-				self.upload_image_details = [logged["userEnrollNum"],args[0]]
-				self.upload_profile_photo(self.upload_image_details[0],self.upload_image_details[1])		
+		if args[0] != 1:	
+			logged = self.Cursor.get_userdata()
+			self.upload_image_details = [logged["userEnrollNum"],args[0]]
+			self.upload_profile_photo(self.upload_image_details[0],self.upload_image_details[1])		
 		else:
 			toast("noting selected.")
 		self.file_manager.close()
@@ -89,7 +86,7 @@ class Profile(Screen):
 		self.ids.class_field.disabled = True
 		self.ids.contact_field.disabled = True
 		self.ids.email_field.disabled = True
-		self.manager.get_screen("Home").ids.Nlabel.text = Name.text
+		self.manager.get_screen("Home").ids.Nlabel.text = Name.text.split()[0]
 		self.ids.camera.icon = ""
 		self.ids.name_field.icon_right = ""
 		self.ids.class_field.icon_right = ""
@@ -100,11 +97,9 @@ class Profile(Screen):
 		self.ids.contact_field.text = Phone.text	
 		self.ids.email_field.text = Email.text
 		if platform != "android":
-			with open(os.getcwd() + r"\Modules\loginfo.json","r") as f:
-				data = json.loads(f.read())
+			data = self.Cursor.get_userdata()
 		else:
-			with open(os.getcwd() + r"/Modules/loginfo.json","r") as f:
-				data = json.loads(f.read())
+			data = self.Cursor.get_userdata()
 		role = data["role"]
 		sec = data["userSection"]
 		phone = data["userPhone"]
@@ -126,14 +121,7 @@ class Profile(Screen):
 			UnitTwoMarks = data["userMarks"]["UnitTwoMarks"]
 			UnitThreeMarks = data["userMarks"]["UnitThreeMarks"]
 			PresentDays = presentdays
-			if platform != "android":
-				with open(os.getcwd() + r"\Modules\loginfo.txt","w+") as f:
-					f.write('{"status":"%s","role": "%s","userName": "%s","userClass":"%s","userSection":"%s","userPhone":"%s","userEmail":"%s","userEnrollNum":"%s","userAttendence":"%s","userMarks":{"UnitOneMarks":[%s],"UnitTwoMarks":[%s],"UnitThreeMarks":[%s]}}'''%("logged","student",User,Class,Sec,Phone,Email,Enrollment_no,PresentDays,UnitOneMarks,UnitTwoMarks,UnitThreeMarks))	
-			
-			else:
-				with open(os.getcwd() + r"/Modules/loginfo.txt","w+") as f:
-					f.write('{"status":"%s","role": "%s","userName": "%s","userClass":"%s","userSection":"%s","userPhone":"%s","userEmail":"%s","userEnrollNum":"%s","userAttendence":"%s","userMarks":{"UnitOneMarks":[%s],"UnitTwoMarks":[%s],"UnitThreeMarks":[%s]}}'''%("logged","student",User,Class,Sec,Phone,Email,Enrollment_no,PresentDays,UnitOneMarks,UnitTwoMarks,UnitThreeMarks))	
-			
+			self.Cursor.push_userdata('{"status":"%s","role": "%s","userName": "%s","userClass":"%s","userSection":"%s","userPhone":"%s","userEmail":"%s","userEnrollNum":"%s","userAttendence":"%s","userMarks":{"UnitOneMarks":[%s],"UnitTwoMarks":[%s],"UnitThreeMarks":[%s]}}'''%("logged","student",User,Class,Sec,Phone,Email,Enrollment_no,PresentDays,UnitOneMarks,UnitTwoMarks,UnitThreeMarks))
 			toast(text="updated successfully")
 			self.ids.pro_label.text = ""
 		except Exception as e:
