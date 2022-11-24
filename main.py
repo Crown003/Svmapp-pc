@@ -30,7 +30,7 @@ class helper:
 	def get_userdata(self):
 		try:
 			#opening file containing userlogin informations.
-			with open(".//Modules//loginfo.json","r+") as f:
+			with open("./Modules/loginfo.json","r+") as f:
 				userdata = json.loads(f.read())
 				return userdata
 		except Exception as e:
@@ -42,7 +42,7 @@ class helper:
 		try:
 			print(args[0])
 			#opening file containing userlogin informations.
-			with open(".//Modules//loginfo.json","w+") as f:
+			with open("./Modules/loginfo.json","w+") as f:
 				userdata = json.dumps(f.write(args[0]))
 				return 201
 		except Exception as e:
@@ -90,7 +90,7 @@ class Main(MDApp):
 										
 			except Exception as e:
 				if e == FileNotFoundError:
-					with open(".//Modules//loginfo.json","x") as f:
+					with open("./Modules/loginfo.json","x") as f:
 						pass
 				self.root.set_current("LoginPage")
 		
@@ -98,10 +98,10 @@ class Main(MDApp):
 			"""This method update the user data according to their  profile."""
 			check = self.Cursor.get_userdata()
 			try:	
-				a = self.get_Profile_image(check["userEnrollNum"],".//profile.png")
+				a = self.get_Profile_image(check["userEnrollNum"],"./profile.png")
 				User_profile = r"assets/noprofile.png"
 				if a == "exist":
-					User_profile =".//profile.png"
+					User_profile ="./profile.png"
 				self.root.get_screen("Profile").ids.profile_image.source = User_profile
 				self.root.get_screen("Home").ids.main_page_profile.source = User_profile
 				self.reload_home_image()
@@ -203,7 +203,7 @@ class Main(MDApp):
 			"""method to logout the user"""
 			print(arg[0])
 			self.data_updated = False
-			with open(".//Modules//loginfo.json","w") as f:
+			with open("./Modules/loginfo.json","w") as f:
 				json.dump(f.write('{"status": "loggedout"}'))
 			self.root.set_current("LoginPage")
 			self.close_dialog_logout()
