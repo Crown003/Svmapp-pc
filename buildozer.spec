@@ -41,13 +41,13 @@ requirements =  python3,multitasking,jnius,Kivy==2.0.0,akivymd==1.2.1,android==1
 
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
-orientation = all
+orientation = portrait
 
 # (bool) Indicate if the application should be fullscreen or not
 fullscreen = 0
 
 # (int) Target Android API, should be as high as possible.
-android.api = 30
+android.api = 31
 
 # (bool) If True, then skip trying to update the Android sdk
 # This can be useful to avoid excess Internet downloads or save time
